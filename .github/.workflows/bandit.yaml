@@ -1,0 +1,9 @@
+on: [push]
+
+jobs:
+  bandit:
+    uses: davidslusser/actions/.github/workflows/bandit.yaml@main
+    with:
+      src: "src"
+      options: "-c pyproject.toml -r"
+      pip_install_command: "pip install .[dev]"

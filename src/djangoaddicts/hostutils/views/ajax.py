@@ -19,11 +19,11 @@ class GetHostCpuStats(AjaxGetView):
 
     def get(self, request, *args, **kwargs):
         cpu = int(request.GET["client_response"])
-        self.data = dict(
-            time=psutil.cpu_times(percpu=True)[cpu],
-            time_percent=psutil.cpu_times_percent(percpu=True)[cpu],
-            frequency=psutil.cpu_freq(percpu=True)[cpu],
-        )
+        self.data = {
+            "time": psutil.cpu_times(percpu=True)[cpu],
+            "time_percent": psutil.cpu_times_percent(percpu=True)[cpu],
+            "frequency": psutil.cpu_freq(percpu=True)[cpu],
+        }
         return super().get(request, *args, **kwargs)
 
 

@@ -9,18 +9,19 @@ from djangoaddicts.hostutils.forms import HostProcessFilterForm
 
 class GetHostProcesses(View):
     def get(self, request):
+        """Get host prcesses"""
         context = {}
         process_list = list(psutil.process_iter())
         filter_form = HostProcessFilterForm(request.GET or None)
 
-        counts = dict(
-            running=len([i for i in process_list if i.status() == "running"]),
-            sleeping=len([i for i in process_list if i.status() == "sleeping"]),
-            idle=len([i for i in process_list if i.status() == "idle"]),
-            stopped=len([i for i in process_list if i.status() == "stopped"]),
-            zombie=len([i for i in process_list if i.status() == "zombie"]),
-            dead=len([i for i in process_list if i.status() == "dead"]),
-        )
+        counts = {
+            "running": len([i for i in process_list if i.status() == "running"]),
+            "sleeping": len([i for i in process_list if i.status() == "sleeping"]),
+            "idle": len([i for i in process_list if i.status() == "idle"]),
+            "stopped": len([i for i in process_list if i.status() == "stopped"]),
+            "zombie": len([i for i in process_list if i.status() == "zombie"]),
+            "dead": len([i for i in process_list if i.status() == "dead"]),
+        }
         context["counts"] = counts
 
         # check for form clearing

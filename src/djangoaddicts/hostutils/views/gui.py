@@ -53,14 +53,14 @@ class ShowHostProcesses(View):
         context["subtitle"] = psutil.os.uname()[1]
         process_list = list(psutil.process_iter())
         context["process_list"] = process_list
-        counts = dict(
-            running=len([i for i in process_list if i.status() == "running"]),
-            sleeping=len([i for i in process_list if i.status() == "sleeping"]),
-            idle=len([i for i in process_list if i.status() == "idle"]),
-            stopped=len([i for i in process_list if i.status() == "stopped"]),
-            zombie=len([i for i in process_list if i.status() == "zombie"]),
-            dead=len([i for i in process_list if i.status() == "dead"]),
-        )
+        counts = {
+            "running": len([i for i in process_list if i.status() == "running"]),
+            "sleeping": len([i for i in process_list if i.status() == "sleeping"]),
+            "idle": len([i for i in process_list if i.status() == "idle"]),
+            "stopped": len([i for i in process_list if i.status() == "stopped"]),
+            "zombie": len([i for i in process_list if i.status() == "zombie"]),
+            "dead": len([i for i in process_list if i.status() == "dead"]),
+        }
         context["counts"] = counts
         filter_form = {}
         filter_form["form"] = HostProcessFilterForm(request.GET or None)
@@ -142,15 +142,15 @@ class ShowHostCpu(View):
         context["times_percent_list"] = psutil.cpu_times_percent(percpu=True)
         context["percent_list"] = psutil.cpu_percent(interval=None, percpu=True)
         context["frequency_list"] = psutil.cpu_freq(percpu=True)
-        context["cpu_range"] = [i for i in range(psutil.cpu_count(logical=True))]
+        context["cpu_range"] = list(range(psutil.cpu_count(logical=True)))
         cpu_data = {}
         for i in range(context["logical_count"]):
-            cpu_data[i] = dict(
-                times=context["times_list"][i],
-                time_percent=context["times_percent_list"][i],
-                percent=context["percent_list"][i],
-                frequency=context["frequency_list"][i],
-            )
+            cpu_data[i] = {
+                "times": context["times_list"][i],
+                "time_percent": context["times_percent_list"][i],
+                "percent": context["percent_list"][i],
+                "frequency": context["frequency_list"][i],
+            }
         context["cpu_data"] = cpu_data
         context["load_avg_1"], context["load_avg_5"], context["load_avg_15"] = [
             round(x / psutil.cpu_count() * 100, 2) for x in psutil.getloadavg()

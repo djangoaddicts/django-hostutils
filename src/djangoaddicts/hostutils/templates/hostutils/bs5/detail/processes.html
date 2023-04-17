@@ -66,7 +66,7 @@
             <div class="col-8">
                 <div class="text-primary text-center h1 mb-2"><b>{{ title }}</b></div>
                 <div class="text-secondary text-center h5 mb-2">{{ subtitle|safe }}</div>
-                {% include 'handyhelpers/snippets/processes_results_timestamp.htm' %}
+                {% include 'hostutils/bs5/snippets/processes_results_timestamp.htm' %}
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
     <div id="id_title_card_wrapper" class="container-fluid mt-5">
         <div class="titlecard-container">
             <div class="card titlecard shadow hvr-grow"
-                 hx-get="{% url 'handyhelpers:get_host_processes' %}?source=card&status=running" hx-target='#id_process_list_container'
+                 hx-get="{% url 'hostutils:get_host_processes' %}?source=card&status=running" hx-target='#id_process_list_container'
                  onclick="document.getElementById('form_{{ filter_form.modal_name }}').reset()">
                 <div class="card-body">
                     <div class="stat">{{ counts.running }}</div>
@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="card titlecard shadow hvr-grow"
-                 hx-get="{% url 'handyhelpers:get_host_processes' %}?source=card&status=idle" hx-target='#id_process_list_container'
+                 hx-get="{% url 'hostutils:get_host_processes' %}?source=card&status=idle" hx-target='#id_process_list_container'
                  onclick="document.getElementById('form_{{ filter_form.modal_name }}').reset()">
                 <div class="card-body">
                     <div class="stat">{{ counts.idle }}</div>
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="card titlecard shadow hvr-grow"
-                 hx-get="{% url 'handyhelpers:get_host_processes' %}?source=card&status=sleeping" hx-target='#id_process_list_container'
+                 hx-get="{% url 'hostutils:get_host_processes' %}?source=card&status=sleeping" hx-target='#id_process_list_container'
                  onclick="document.getElementById('form_{{ filter_form.modal_name }}').reset()">
                 <div class="card-body">
                     <div class="stat">{{ counts.sleeping }}</div>
@@ -101,7 +101,7 @@
                 </div>
             </div>
             <div class="card titlecard shadow hvr-grow"
-                 hx-get="{% url 'handyhelpers:get_host_processes' %}?source=card&status=stopped" hx-target='#id_process_list_container'
+                 hx-get="{% url 'hostutils:get_host_processes' %}?source=card&status=stopped" hx-target='#id_process_list_container'
                  onclick="document.getElementById('form_{{ filter_form.modal_name }}').reset()">
                 <div class="card-body">
                     <div class="stat">{{ counts.stopped }}</div>
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="card titlecard shadow hvr-grow"
-                 hx-get="{% url 'handyhelpers:get_host_processes' %}?source=card&status=zombie" hx-target='#id_process_list_container'
+                 hx-get="{% url 'hostutils:get_host_processes' %}?source=card&status=zombie" hx-target='#id_process_list_container'
                  onclick="document.getElementById('form_{{ filter_form.modal_name }}').reset()">
                 <div class="card-body">
                     <div class="stat">{{ counts.zombie }}</div>
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="card titlecard shadow hvr-grow"
-                 hx-get="{% url 'handyhelpers:get_host_processes' %}?source=card&status=dead" hx-target='#id_process_list_container'
+                 hx-get="{% url 'hostutils:get_host_processes' %}?source=card&status=dead" hx-target='#id_process_list_container'
                  onclick="document.getElementById('form_{{ filter_form.modal_name }}').reset()">
                 <div class="card-body">
                     <div class="stat">{{ counts.dead }}</div>
@@ -131,7 +131,7 @@
 
 <section class="mb-5 animated fadeIn" style="animation-delay: .35s;">
     <div class="container-fluid mt-5" id="id_process_list_container">
-        {% include 'handyhelpers/snippets/host_process_card.htm' %}
+        {% include 'hostutils/bs5/snippets/host_process_card.htm' %}
     </div>
 </section>
 

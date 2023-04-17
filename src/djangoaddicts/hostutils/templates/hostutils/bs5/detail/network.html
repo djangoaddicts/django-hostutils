@@ -140,7 +140,7 @@
                     <ul class="list-group mx-auto justify-content-center" style="max-width: 93%; margin-top: .5%; margin-bottom: .5%">
                         {% for k,v in interface_list.items %}
                         <li class="list-group-item bg-light shadow-sm hvr-grow mb-3">
-                            <a href="#" onClick="showInfo('{% url "handyhelpers:host_interface_stats" %}', '{{k}}', 'Network Stats: <small><i>{{k}}</i></small>', false);">
+                            <a href="#" onClick="showInfo('{% url "hostutils:host_interface_stats" %}', '{{k}}', 'Network Stats: <small><i>{{k}}</i></small>', false);">
                                 <div class="row">
                                     <div class="key h5">{{ k }}:</div>
                                     {% for item in v %}

@@ -159,7 +159,7 @@
                     <ul class="list-group mx-auto justify-content-center" style="max-width: 93%; margin-top: .5%; margin-bottom: .5%">
                         {% for cpu, data in cpu_data.items %}
                         <li class="list-group-item bg-light shadow-sm hvr-grow mb-3">
-                            <a href="#" onClick="showInfo('{% url "handyhelpers:get_host_cpu_stats" %}', '{{cpu}}', 'CPU Stats: <small><i>{{cpu}}</i></small>', true);">
+                            <a href="#" onClick="showInfo('{% url "hostutils:get_host_cpu_stats" %}', '{{cpu}}', 'CPU Stats: <small><i>{{cpu}}</i></small>', true);">
                                 <div class="row">
                                     <div class="col-xs-12 col-md-2"><span class="key">CPU:</span><span class="value">{{ cpu }}</span></div>
                                     <div class="col-xs-12 col-md-2"><span class="key">Percent:</span><span class="value">{{ data.percent }}%</span></div>

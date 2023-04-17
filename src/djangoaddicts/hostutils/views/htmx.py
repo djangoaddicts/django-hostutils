@@ -69,9 +69,9 @@ class GetHostProcesses(View):
         filter_form["modal_size"] = "modal-lg"
         filter_form["modal_title"] = "Filter Host Processes"
         filter_form["hx_method"] = "hx-get"
-        filter_form["hx_url"] = "/handyhelpers/get_host_processes"
+        filter_form["hx_url"] = "/hostutils/get_host_processes"
         filter_form["hx_target"] = "id_process_list_container"
         filter_form["method"] = "GET"
         filter_form["action"] = "Filter"
         context["filter_form"] = filter_form
-        return render(request, template_name="handyhelpers/snippets/host_process_card_swap.htm", context=context)
+        return render(request, template_name="hostutils/bs5/snippets/host_process_card_swap.htm", context=context)

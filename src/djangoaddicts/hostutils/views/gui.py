@@ -68,7 +68,7 @@ class ShowHostProcesses(View):
         filter_form["modal_size"] = "modal-lg"
         filter_form["modal_title"] = "Filter Host Processes"
         filter_form["hx_method"] = "hx-get"
-        filter_form["hx_url"] = "/handyhelpers/get_host_processes"
+        filter_form["hx_url"] = "/hostutils/get_host_processes"
         filter_form["hx_target"] = "id_process_list_container"
         filter_form["method"] = "GET"
         filter_form["action"] = "Filter"

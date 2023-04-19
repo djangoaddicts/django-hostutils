@@ -1,8 +1,8 @@
 from djangoaddicts.hostutils.views.ajax import (
     GetHostCpuStats,
     GetHostNetworkStats,
-    GetHostParitionUsage,
-    GetHostProcessDetails,
+    GetHostParitionStats,
+    GetHostProcessStats,
 )
 from djangoaddicts.hostutils.views.gui import (
     ShowHost,
@@ -18,8 +18,8 @@ from djangoaddicts.hostutils.views.htmx import GetHostProcesses
 __all__ = [
     "GetHostCpuStats",
     "GetHostNetworkStats",
-    "GetHostParitionUsage",
-    "GetHostProcessDetails",
+    "GetHostParitionStats",
+    "GetHostProcessStats",
     "GetHostProcesses",
     "ShowHost",
     "ShowHostCpu",

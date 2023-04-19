@@ -6,8 +6,6 @@ from django.shortcuts import reverse
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.core.settings")
 django.setup()
 
-from django.contrib.auth.models import User
-
 
 class ShowHostCpuTests(TestCase):
     """test ShowHostCpu view"""

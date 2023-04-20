@@ -2,6 +2,9 @@
 [tool.pytest.ini_options]
 addopts = "-s -v -x --strict-markers -m 'not extra' --doctest-modules --cov=."
 testpaths = ["tests"]
+filterwarnings = [
+    "ignore::UserWarning",
+]
 
 
 [tool.coverage.run]

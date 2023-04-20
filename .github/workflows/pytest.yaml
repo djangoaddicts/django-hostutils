@@ -4,6 +4,6 @@ jobs:
   pytest:
     uses: davidslusser/actions/.github/workflows/pytest.yaml@main
     with:
-      src: "src"
+      src: ""
       options: ""
       pip_install_command: "pip install .[dev]"

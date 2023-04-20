@@ -1,0 +1,26 @@
+{% comment %}
+This snippet adds links to for the views provided by django-hostutils and is designed to be used within a
+bootstrap navbar.
+
+To use this, add the following in your navbar where appropriate:
+    {% include 'hostutils/bs5/snippets/hostutils_nav_menu.htm' %}
+
+{% endcomment %}
+
+
+<ul class="navbar-nav mr-3">
+    <li class="nav-item dropdown align-right mr-4">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-server"></i>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'hostutils:host_details' %}">Host Metrics</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'hostutils:host_cpu' %}">CPU</a></li>
+            <li><a class="dropdown-item" href="{% url 'hostutils:host_disk' %}">Disk</a></li>
+            <li><a class="dropdown-item" href="{% url 'hostutils:host_memory' %}">Memory</a></li>
+            <li><a class="dropdown-item" href="{% url 'hostutils:host_network' %}">Network</a></li>
+            <li><a class="dropdown-item" href="{% url 'hostutils:host_process' %}">Processes</a></li>
+        </ul>
+    </li>
+</ul>

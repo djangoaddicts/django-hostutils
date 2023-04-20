@@ -1,0 +1,44 @@
+# https://docs.pytest.org/en/6.2.x/customize.html#pyproject-toml
+[tool.pytest.ini_options]
+addopts = "-s -v -x --strict-markers -m 'not extra' --doctest-modules --cov=."
+testpaths = ["tests"]
+
+
+[tool.coverage.run]
+branch = true
+source = ["tests"]
+omit = ["*_test.py", "*/tests/*", "setup.py"]
+
+
+[tool.coverage.report]
+show_missing = true
+
+
+[tool.black]
+line-length = 120
+
+
+[tool.flake8]
+ignore = "E203,E266,H106,H904,E133"
+max-line-length = 120
+max-complexity = 25
+hang-closing = true
+exclude = "tests"
+
+
+[tool.pylint.MASTER]
+ignore-paths = ["tests"]
+exit-zero = true
+
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = "R0903,R0913,R0901,W0613,W0718,C0114,C0115,C0103,R1725,R0801,R1702,R0912"
+
+
+[tool.pylint.format]
+max-line-length = "120"
+
+
+
+[tool.bandit]
+exclude_dirs = ["venv", "tests"]

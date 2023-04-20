@@ -1,0 +1,9 @@
+on: [push]
+
+jobs:
+  pylint:
+    uses: davidslusser/actions/.github/workflows/pylint.yaml@main
+    with:
+      src: "src"
+      options: ""
+      pip_install_command: "pip install .[dev]"

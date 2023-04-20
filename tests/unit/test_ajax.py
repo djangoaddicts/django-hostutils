@@ -1,5 +1,9 @@
+import psutil
+
 from django.test import TestCase
 from django.shortcuts import reverse
+
+from unittest.mock import patch
 
 
 class GetHostCpuStatsTests(TestCase):
@@ -76,6 +80,14 @@ class GetHostProcessStatsTests(TestCase):
         response = self.client.get(self.url, data={"client_response": "1"}, **self.headers)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "hostutils/bs5/ajax/get_process_stats.htm")
+
+    def test_access_denied(self):
+        with patch("psutil.Process") as mocked_process:
+            mocked_process.side_effect = psutil.AccessDenied
+            response = self.client.get(self.url, data={"client_response": "838"}, **self.headers)
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, "hostutils/bs5/ajax/get_process_stats.htm")
+            self.assertIn("data not available for this process", response.content.decode("utf8"))
 
     def test_get_with_invalid_data(self):
         response = self.client.get(self.url, data={"blah": 0}, **self.headers)

@@ -89,8 +89,8 @@ class GetHostProcessStats(AjaxGetView):
         try:
             proc = request.GET["client_response"]
             self.data = psutil.Process(int(proc))
-        except Exception as err:
-            return HttpResponse('Invalid request inputs', status=400)
         except psutil.AccessDenied:
             self.data = {}
+        except Exception as err:
+            return HttpResponse('Invalid request inputs', status=400)
         return super().get(request, *args, **kwargs)

@@ -1,10 +1,5 @@
-import django
-import os
 from django.test import TestCase
 from django.shortcuts import reverse
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.core.settings")
-django.setup()
 
 
 class ShowHostCpuTests(TestCase):

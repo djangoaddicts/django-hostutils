@@ -8,57 +8,68 @@ from djangoaddicts.hostutils.forms import HostProcessFilterForm
 
 
 class GetHostProcesses(View):
+    
+    @staticmethod
+    def get_process_count(process_list: list , status: str) -> int:
+        """get a count of processes for a given status
+
+        Args:
+            process_list (list): list of processes as returned from psutil.process_iter(
+            status (str): name of process status to count
+
+        Returns:
+            int: number of processes of 'status'
+        """
+        count = 0
+        for process in process_list:
+            try:
+                if process.status() == status:
+                    count +=1 
+            except psutil.NoSuchProcess:
+                continue
+        return count
+    
     def get(self, request):
         """Get host prcesses"""
         context = {}
         process_list = list(psutil.process_iter())
         filter_form = HostProcessFilterForm(request.GET or None)
-
-        counts = {
-            "running": len([i for i in process_list if i.status() == "running"]),
-            "sleeping": len([i for i in process_list if i.status() == "sleeping"]),
-            "idle": len([i for i in process_list if i.status() == "idle"]),
-            "stopped": len([i for i in process_list if i.status() == "stopped"]),
-            "zombie": len([i for i in process_list if i.status() == "zombie"]),
-            "dead": len([i for i in process_list if i.status() == "dead"]),
+        context["counts"] = {
+            "running": self.get_process_count(process_list, "running"),
+            "sleeping": self.get_process_count(process_list, "sleeping"),
+            "idle": self.get_process_count(process_list, "idle"),
+            "stopped": self.get_process_count(process_list, "stopped"),
+            "zombie": self.get_process_count(process_list, "zombie"),
+            "dead": self.get_process_count(process_list, "dead"),
         }
-        context["counts"] = counts
 
-        # check for form clearing
         if request.GET.dict().get("clear", None):
             context["clear_filter"] = False
 
         else:
             if filter_form.is_valid():
                 context["clear_filter"] = True
+                
                 if filter_form.cleaned_data.get("status", None):
                     filtered_process_list = []
                     for i in process_list:
-                        try:
-                            if i.status() in filter_form.cleaned_data["status"]:
-                                filtered_process_list.append(i)
-                        except psutil.NoSuchProcess:
-                            continue
+                        if i.status() in filter_form.cleaned_data["status"]:
+                            filtered_process_list.append(i)
                     process_list = filtered_process_list
 
                 if filter_form.cleaned_data.get("created_at__gte", None):
                     filtered_process_list = []
                     for i in process_list:
-                        try:
-                            if i.create_time() > filter_form.cleaned_data["created_at__gte"].timestamp():
-                                filtered_process_list.append(i)
-                        except psutil.NoSuchProcess:
-                            continue
+                        if i.create_time() > filter_form.cleaned_data["created_at__gte"].timestamp():
+                            filtered_process_list.append(i)
                     process_list = filtered_process_list
                 if filter_form.cleaned_data.get("created_at__lte", None):
                     filtered_process_list = []
                     for i in process_list:
-                        try:
-                            if i.create_time() < filter_form.cleaned_data["created_at__lte"].timestamp():
-                                filtered_process_list.append(i)
-                        except psutil.NoSuchProcess:
-                            continue
+                        if i.create_time() < filter_form.cleaned_data["created_at__lte"].timestamp():
+                            filtered_process_list.append(i)
                     process_list = filtered_process_list
+
         context["process_list"] = process_list
         context["title"] = "Host Processes"
         context["now"] = datetime.datetime.now()

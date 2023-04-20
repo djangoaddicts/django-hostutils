@@ -18,7 +18,6 @@ SECRET_KEY = "test"
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    "auditlog",
     "handyhelpers",
     "djangoaddicts.hostutils",
 ]

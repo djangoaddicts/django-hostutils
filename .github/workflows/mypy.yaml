@@ -5,4 +5,4 @@ jobs:
     uses: davidslusser/actions/.github/workflows/mypy.yaml@main
     with:
       src: "src"
-      dependancies: "pip install .[dev]"
+      pip_install_command: "pip install .[dev]"

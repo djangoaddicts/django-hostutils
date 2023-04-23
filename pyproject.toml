@@ -2,6 +2,9 @@
 [tool.pytest.ini_options]
 addopts = "-s -v -x --strict-markers -m 'not extra' --doctest-modules --cov=."
 testpaths = ["tests"]
+filterwarnings = [
+    "ignore::UserWarning",
+]
 
 
 [tool.coverage.run]
@@ -12,6 +15,10 @@ omit = ["*_test.py", "*/tests/*", "setup.py"]
 
 [tool.coverage.report]
 show_missing = true
+
+
+[tool.bandit]
+exclude_dirs = ["venv", "tests"]
 
 
 [tool.black]
@@ -39,6 +46,6 @@ disable = "R0903,R0913,R0901,W0613,W0718,C0114,C0115,C0103,R1725,R0801,R1702,R09
 max-line-length = "120"
 
 
-
-[tool.bandit]
-exclude_dirs = ["venv", "tests"]
+[tool.mypy]
+ignore_missing_imports = true
+exclude = ['venv/*']

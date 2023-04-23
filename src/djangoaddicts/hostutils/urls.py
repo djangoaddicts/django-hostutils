@@ -17,7 +17,7 @@ urlpatterns = [
     path("get_cpu_stats/", ajax.GetHostCpuStats.as_view(), name="get_cpu_stats"),
     path("get_interface_stats/", ajax.GetHostNetworkStats.as_view(), name="get_interface_stats"),
     path("get_partition_stats/", ajax.GetHostParitionStats.as_view(), name="get_partition_stats"),
-    path("get_process_stats/", ajax.GetHostProcessStats.as_view(), name="get_process_stats"),   
+    path("get_process_stats/", ajax.GetHostProcessStats.as_view(), name="get_process_stats"),
     # htmx views
     path("get_host_processes/", htmx.GetHostProcesses.as_view(), name="get_host_processes"),
 ]

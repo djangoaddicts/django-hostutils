@@ -1,0 +1,8 @@
+on: [push]
+
+jobs:
+  mypy:
+    uses: davidslusser/actions/.github/workflows/mypy.yaml@main
+    with:
+      src: "src"
+      pip_install_command: "pip install .[dev]"

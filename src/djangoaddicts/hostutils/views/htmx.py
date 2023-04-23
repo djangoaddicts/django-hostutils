@@ -8,9 +8,8 @@ from djangoaddicts.hostutils.forms import HostProcessFilterForm
 
 
 class GetHostProcesses(View):
-    
     @staticmethod
-    def get_process_count(process_list: list , status: str) -> int:
+    def get_process_count(process_list: list, status: str) -> int:
         """get a count of processes for a given status
 
         Args:
@@ -24,11 +23,11 @@ class GetHostProcesses(View):
         for process in process_list:
             try:
                 if process.status() == status:
-                    count +=1 
+                    count += 1
             except psutil.NoSuchProcess:
                 continue
         return count
-    
+
     def get(self, request):
         """Get host prcesses"""
         context = {}
@@ -49,7 +48,7 @@ class GetHostProcesses(View):
         else:
             if filter_form.is_valid():
                 context["clear_filter"] = True
-                
+
                 if filter_form.cleaned_data.get("status", None):
                     filtered_process_list = []
                     for i in process_list:

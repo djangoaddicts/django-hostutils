@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.template import loader
 
 from handyhelpers.views.ajax import AjaxGetView
+from typing import Union
 
 
 class GetHostCpuStats(AjaxGetView):
@@ -18,7 +19,7 @@ class GetHostCpuStats(AjaxGetView):
 
     template = loader.get_template("hostutils/bs5/ajax/get_cpu_stats.htm")
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs) -> HttpResponse:
         try:
             cpu = int(request.GET["client_response"])
             self.data = {
@@ -27,8 +28,8 @@ class GetHostCpuStats(AjaxGetView):
                 "frequency": psutil.cpu_freq(percpu=True)[cpu],
             }
             return super().get(request, *args, **kwargs)
-        except Exception as err:
-            return HttpResponse('Invalid request inputs', status=400)
+        except Exception:
+            return HttpResponse("Invalid request inputs", status=400)
 
 
 class GetHostNetworkStats(AjaxGetView):
@@ -43,13 +44,13 @@ class GetHostNetworkStats(AjaxGetView):
 
     template = loader.get_template("hostutils/bs5/ajax/get_interface_stats.htm")
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs) -> HttpResponse:
         try:
             interface = self.request.GET["client_response"]
             self.data = psutil.net_if_stats()[interface]
             return super().get(request, *args, **kwargs)
-        except Exception as err:
-            return HttpResponse('Invalid request inputs', status=400)
+        except Exception:
+            return HttpResponse("Invalid request inputs", status=400)
 
 
 class GetHostParitionStats(AjaxGetView):
@@ -64,13 +65,13 @@ class GetHostParitionStats(AjaxGetView):
 
     template = loader.get_template("hostutils/bs5/ajax/get_partition_stats.htm")
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs) -> HttpResponse:
         try:
             part = request.GET["client_response"]
             self.data = psutil.disk_usage(part)
             return super().get(request, *args, **kwargs)
-        except Exception as err:
-            return HttpResponse('Invalid request inputs', status=400)
+        except Exception:
+            return HttpResponse("Invalid request inputs", status=400)
 
 
 class GetHostProcessStats(AjaxGetView):
@@ -85,12 +86,13 @@ class GetHostProcessStats(AjaxGetView):
 
     template = loader.get_template("hostutils/bs5/ajax/get_process_stats.htm")
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs) -> HttpResponse:
+        self.data: Union[dict, psutil.Process] 
         try:
             proc = request.GET["client_response"]
             self.data = psutil.Process(int(proc))
-        except Exception as err:
-            return HttpResponse('Invalid request inputs', status=400)
         except psutil.AccessDenied:
             self.data = {}
+        except Exception:
+            return HttpResponse("Invalid request inputs", status=400)
         return super().get(request, *args, **kwargs)

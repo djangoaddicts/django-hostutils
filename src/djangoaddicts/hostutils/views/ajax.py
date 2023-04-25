@@ -1,10 +1,11 @@
-import psutil
+from typing import Union
 
 from django.http import HttpResponse
 from django.template import loader
 
 from handyhelpers.views.ajax import AjaxGetView
-from typing import Union
+
+import psutil
 
 
 class GetHostCpuStats(AjaxGetView):
@@ -87,7 +88,7 @@ class GetHostProcessStats(AjaxGetView):
     template = loader.get_template("hostutils/bs5/ajax/get_process_stats.htm")
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
-        self.data: Union[dict, psutil.Process] 
+        self.data: Union[dict, psutil.Process]
         try:
             proc = request.GET["client_response"]
             self.data = psutil.Process(int(proc))

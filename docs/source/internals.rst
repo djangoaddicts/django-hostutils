@@ -10,6 +10,7 @@ documentation is automatically generated from the source code. See the source co
 https://github.com/davidslusser/django-hostutils
 
 
+|
 GUI Views
 ---------
 .. automodule:: djangoaddicts.hostutils.views.gui

@@ -18,19 +18,31 @@ Host utilities package for django projects. Bootstrap 5 templates are provided. 
 
 <br/>
 
-## Code Quality Checks
+## Code Quality
 | Workflow | Description             | Status                                                                       |
 |----------|-------------------------|------------------------------------------------------------------------------|
 |Bandit|security checks|![Bandit](https://github.com/davidslusser/workflow_tests/actions/workflows/bandit.yaml/badge.svg)|
 |Black|code formatting|![Black](https://github.com/davidslusser/workflow_tests/actions/workflows/black.yaml/badge.svg)|
-|Mypy|static type checking|![Mypy](https://github.com/davidslusser/workflow_tests/actions/workflows/mypy.yaml/badge.svg)|
 |Pylint|static code analysis|![Pylint](https://github.com/davidslusser/workflow_tests/actions/workflows/pylint.yaml/badge.svg)|
 |Pytest|unit testing|![Pytest](https://github.com/davidslusser/workflow_tests/actions/workflows/pytest.yaml/badge.svg)|
 
 <br/>
 
+## Documentation
+| Workflow | Description             | Status                                                                       |
+|----------|-------------------------|------------------------------------------------------------------------------|
+|Docs|ReadTheDocs Build|[![Documentation Status](https://readthedocs.org/projects/django-hostutils/badge/?version=latest)](https://django-hostutils.readthedocs.io/en/latest/?badge=latest)|
+
+Full documentation is available here:
+
+https://django-hostutils.readthedocs.io/en/latest/index.html 
+
+<br/>
+
 ## License
 django-userextensions is licensed under the GNU-3 license (see the LICENSE file for details).
+
+https://github.com/davidslusser/django-hostutils/blob/docs/LICENSE 
 
 <br/>
 
@@ -46,6 +58,8 @@ django-userextensions is licensed under the GNU-3 license (see the LICENSE file 
    ```python
    path("hostutils/", include("djangoaddicts.hostutils.urls"), ),
    ```
+
+<br/>
 
 ## Usage
 Several pages are available. If you have a Bootstrap 5 nav-menu you can add the following snippet in your navbar where appropriate:

@@ -23,6 +23,7 @@ Host utilities package for django projects. Bootstrap 5 templates are provided. 
 |----------|-------------------------|------------------------------------------------------------------------------|
 |Bandit|security checks|![Bandit](https://github.com/davidslusser/workflow_tests/actions/workflows/bandit.yaml/badge.svg)|
 |Black|code formatting|![Black](https://github.com/davidslusser/workflow_tests/actions/workflows/black.yaml/badge.svg)|
+|Mypy|static type checking|![Mypy](https://github.com/davidslusser/workflow_tests/actions/workflows/mypy.yaml/badge.svg)|
 |Pylint|static code analysis|![Pylint](https://github.com/davidslusser/workflow_tests/actions/workflows/pylint.yaml/badge.svg)|
 |Pytest|unit testing|![Pytest](https://github.com/davidslusser/workflow_tests/actions/workflows/pytest.yaml/badge.svg)|
 
@@ -40,7 +41,7 @@ https://django-hostutils.readthedocs.io/en/latest/index.html
 <br/>
 
 ## License
-django-userextensions is licensed under the GNU-3 license (see the LICENSE file for details).
+django-hostutils is licensed under the GNU-3 license (see the LICENSE file for details).
 
 https://github.com/davidslusser/django-hostutils/blob/docs/LICENSE 
 
@@ -64,11 +65,11 @@ https://github.com/davidslusser/django-hostutils/blob/docs/LICENSE
 ## Usage
 Several pages are available. If you have a Bootstrap 5 nav-menu you can add the following snippet in your navbar where appropriate:
 
-    ```
-    {% include 'hostutils/bs5/snippets/hostutils_nav_menu.htm' %}
-    ```
+```
+{% include 'hostutils/bs5/snippets/hostutils_nav_menu.htm' %}
+```
 
-Alternatively, individual pages can linked directly:
+Individual pages can also be linked directly:
 
 - Host overview page: 
 

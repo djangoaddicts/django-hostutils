@@ -49,3 +49,6 @@ testpaths = ["tests"]
 filterwarnings = [
     "ignore::UserWarning",
 ]
+
+[tool.setuptools_scm]
+write_to = "src/djangoaddicts/hostutils/_version.py"

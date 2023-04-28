@@ -131,3 +131,4 @@ dmypy.json
 # other
 local_test
 .vscode
+src/djangoaddicts/hostutils/_version.py

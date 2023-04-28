@@ -6,4 +6,4 @@ jobs:
     with:
       src: ""
       options: ""
-      pip_install_command: "pip install .[dev]"
+      pip_install_command: "pip install -e .[dev]"

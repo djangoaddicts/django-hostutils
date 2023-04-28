@@ -13,7 +13,7 @@ show_missing = true
 [tool.coverage.run]
 branch = true
 source = ["tests"]
-omit = ["*_test.py", "*/tests/*", "setup.py"]
+omit = ["*_test.py", "*/tests/*", "*_version.py", "setup.py"]
 
 
 [tool.flake8]

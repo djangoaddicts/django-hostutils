@@ -1,9 +1,6 @@
-# Include the README
-include *.md
+exclude *
+include pyproject.toml
 
-# Include setup.py
-include setup.py
-include setup.cfg
 
 # Include the src files
 recursive-include src *
@@ -11,3 +8,4 @@ recursive-include src *
 recursive-exclude docs *
 recursive-exclude tests *
 recursive-exclude .github *
+recursive-exclude src/*.egg-info

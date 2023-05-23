@@ -11,9 +11,23 @@ https://github.com/davidslusser/django-hostutils
 
 
 |
+AJAX Views
+---------
+.. automodule:: djangoaddicts.hostutils.views.ajax
+    :members: GetHostCpuStats, GetHostNetworkStats, GetHostParitionStats, GetHostProcessStats
+
+
+|
 GUI Views
 ---------
 .. automodule:: djangoaddicts.hostutils.views.gui
     :members: ShowHost, ShowHostCpu, ShowHostDisk, ShowHostNetwork, ShowHostMemory, ShowHostProcesses
+
+
+|
+HTMX Views
+---------
+.. automodule:: djangoaddicts.hostutils.views.htmx
+    :members: GetHostProcesses
 
 |

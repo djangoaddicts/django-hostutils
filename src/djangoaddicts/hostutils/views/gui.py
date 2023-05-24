@@ -13,12 +13,13 @@ class ShowHost(View):
     """Display dashboard like page showing an overview of host data"""
 
     template_name = "hostutils/bs5/detail/detail_host.html"
+    title = "Host Dashboard"
 
     def get(self, request, *args, **kwargs):
         """allow get method"""
         now = datetime.datetime.now()
         context = {}
-        context["title"] = "Host Dashboard"
+        context["title"] = self.title
         context["subtitle"] = psutil.os.uname()[1]
         context["cpu_count"] = psutil.cpu_count(logical=False)
         context["memory"] = psutil.virtual_memory()
@@ -40,15 +41,102 @@ class ShowHost(View):
         return render(request, self.template_name, context=context)
 
 
-class ShowHostProcesses(View):
-    """Display dashboard like page showing host process data"""
+class ShowHostCpu(View):
+    """Display dashboard like page showing host cpu data"""
 
-    template_name = "hostutils/bs5/detail/processes.html"
+    template_name = "hostutils/bs5/detail/cpu.html"
+    title = "CPU Dashboard"
+
+    def get(self, request, *args, **kwargs):
+        """CPU Dashboard"""
+        context = {}
+        context["title"] = self.title
+        context["subtitle"] = psutil.os.uname()[1]
+        context["stats"] = psutil.cpu_stats()
+        context["physical_count"] = psutil.cpu_count(logical=False)
+        context["logical_count"] = psutil.cpu_count(logical=True)
+        context["percent"] = psutil.cpu_percent(interval=None)
+        context["times_list"] = psutil.cpu_times(percpu=True)
+        context["times_percent_list"] = psutil.cpu_times_percent(percpu=True)
+        context["percent_list"] = psutil.cpu_percent(interval=None, percpu=True)
+        context["frequency_list"] = psutil.cpu_freq(percpu=True)
+        context["cpu_range"] = list(range(psutil.cpu_count(logical=True)))
+        cpu_data = {}
+        for i in range(context["logical_count"]):
+            cpu_data[i] = {
+                "times": context["times_list"][i],
+                "time_percent": context["times_percent_list"][i],
+                "percent": context["percent_list"][i],
+                "frequency": context["frequency_list"][i],
+            }
+        context["cpu_data"] = cpu_data
+        context["load_avg_1"], context["load_avg_5"], context["load_avg_15"] = [
+            round(x / psutil.cpu_count() * 100, 2) for x in psutil.getloadavg()
+        ]
+        return render(request, self.template_name, context=context)
+
+
+class ShowHostDisk(View):
+    """Display dashboard like page showing host disk data"""
+
+    template_name = "hostutils/bs5/detail/disk.html"
+    title = "Disk Dashboard"
 
     def get(self, request, *args, **kwargs):
         """allow get method"""
         context = {}
-        context["title"] = "Host Processes"
+        context["title"] = self.title
+        context["subtitle"] = psutil.os.uname()[1]
+        context["usage"] = psutil.disk_usage("/")
+        context["io_counters"] = psutil.disk_io_counters()
+        context["partition_lists"] = psutil.disk_partitions()
+        return render(request, self.template_name, context=context)
+
+
+class ShowHostMemory(View):
+    """Display dashboard like page showing host memory data"""
+
+    template_name = "hostutils/bs5/detail/memory.html"
+    title = "Memory Dashboard"
+
+    def get(self, request, *args, **kwargs):
+        """allow get method"""
+        context = {}
+        context["title"] = self.title
+        context["subtitle"] = psutil.os.uname()[1]
+        context["virtual"] = psutil.virtual_memory()
+        context["swap"] = psutil.swap_memory()
+        return render(request, self.template_name, context=context)
+
+
+class ShowHostNetwork(View):
+    """Display dashboard like page showing host network data"""
+
+    template_name = "hostutils/bs5/detail/network.html"
+    title = "Network Dashboard"
+
+    def get(self, request, *args, **kwargs):
+        """allow get method"""
+        context = {}
+        context["title"] = self.title
+        context["subtitle"] = psutil.os.uname()[1]
+        context["connection_list"] = psutil.net_connections()
+        context["interface_list"] = psutil.net_if_addrs()
+        context["stats_list"] = psutil.net_if_stats()
+        context["counters"] = psutil.net_io_counters()
+        return render(request, self.template_name, context=context)
+
+
+class ShowHostProcesses(View):
+    """Display dashboard like page showing host process data"""
+
+    template_name = "hostutils/bs5/detail/processes.html"
+    title = "Process Dashboard"
+
+    def get(self, request, *args, **kwargs):
+        """allow get method"""
+        context = {}
+        context["title"] = self.title
         context["now"] = datetime.datetime.now()
         context["subtitle"] = psutil.os.uname()[1]
         process_list = list(psutil.process_iter())
@@ -73,86 +161,4 @@ class ShowHostProcesses(View):
         filter_form["method"] = "GET"
         filter_form["action"] = "Filter"
         context["filter_form"] = filter_form
-        return render(request, self.template_name, context=context)
-
-
-class ShowHostNetwork(View):
-    """Display dashboard like page showing host network data"""
-
-    template_name = "hostutils/bs5/detail/network.html"
-
-    def get(self, request, *args, **kwargs):
-        """allow get method"""
-        context = {}
-        context["title"] = "Network Dashboard"
-        context["subtitle"] = psutil.os.uname()[1]
-        context["connection_list"] = psutil.net_connections()
-        context["interface_list"] = psutil.net_if_addrs()
-        context["stats_list"] = psutil.net_if_stats()
-        context["counters"] = psutil.net_io_counters()
-        return render(request, self.template_name, context=context)
-
-
-class ShowHostDisk(View):
-    """Display dashboard like page showing host disk data"""
-
-    template_name = "hostutils/bs5/detail/disk.html"
-
-    def get(self, request, *args, **kwargs):
-        """allow get method"""
-        context = {}
-        context["title"] = "Disk Dashboard"
-        context["subtitle"] = psutil.os.uname()[1]
-        context["usage"] = psutil.disk_usage("/")
-        context["io_counters"] = psutil.disk_io_counters()
-        context["partition_lists"] = psutil.disk_partitions()
-        return render(request, self.template_name, context=context)
-
-
-class ShowHostMemory(View):
-    """Display dashboard like page showing host memory data"""
-
-    template_name = "hostutils/bs5/detail/memory.html"
-
-    def get(self, request, *args, **kwargs):
-        """allow get method"""
-        context = {}
-        context["title"] = "Memory Dashboard"
-        context["subtitle"] = psutil.os.uname()[1]
-        context["virtual"] = psutil.virtual_memory()
-        context["swap"] = psutil.swap_memory()
-        return render(request, self.template_name, context=context)
-
-
-class ShowHostCpu(View):
-    """Display dashboard like page showing host cpu data"""
-
-    template_name = "hostutils/bs5/detail/cpu.html"
-
-    def get(self, request, *args, **kwargs):
-        """allow get method"""
-        context = {}
-        context["title"] = "CPU Dashboard"
-        context["subtitle"] = psutil.os.uname()[1]
-        context["stats"] = psutil.cpu_stats()
-        context["physical_count"] = psutil.cpu_count(logical=False)
-        context["logical_count"] = psutil.cpu_count(logical=True)
-        context["percent"] = psutil.cpu_percent(interval=None)
-        context["times_list"] = psutil.cpu_times(percpu=True)
-        context["times_percent_list"] = psutil.cpu_times_percent(percpu=True)
-        context["percent_list"] = psutil.cpu_percent(interval=None, percpu=True)
-        context["frequency_list"] = psutil.cpu_freq(percpu=True)
-        context["cpu_range"] = list(range(psutil.cpu_count(logical=True)))
-        cpu_data = {}
-        for i in range(context["logical_count"]):
-            cpu_data[i] = {
-                "times": context["times_list"][i],
-                "time_percent": context["times_percent_list"][i],
-                "percent": context["percent_list"][i],
-                "frequency": context["frequency_list"][i],
-            }
-        context["cpu_data"] = cpu_data
-        context["load_avg_1"], context["load_avg_5"], context["load_avg_15"] = [
-            round(x / psutil.cpu_count() * 100, 2) for x in psutil.getloadavg()
-        ]
         return render(request, self.template_name, context=context)

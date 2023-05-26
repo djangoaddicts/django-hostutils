@@ -5,5 +5,5 @@ jobs:
     uses: davidslusser/actions/.github/workflows/pytest.yaml@main
     with:
       src: ""
-      options: "--cov=."
+      options: "--cov=src"
       pip_install_command: "pip install -e .[dev]"

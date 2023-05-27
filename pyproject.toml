@@ -1,14 +1,14 @@
 [build-system]
+build-backend = "setuptools.build_meta"
 requires = [
     "build",
     "setuptools >= 67.7.2",
 	"setuptools_scm >= 7.1",
 	"wheel >= 0.40.0"
 ]
-build-backend = "setuptools.build_meta"
+
 
 [project]
-name = "django-hostutils"
 authors = [
     {name = "David Slusser", email = "dbslusser@gmail.com"},
 ]
@@ -25,14 +25,17 @@ description = "host utilities for django projects"
 dynamic = ["version"]
 keywords = ["django", "host", "utilities"]
 license = {file = "LICENSE"}
+name = "django-hostutils"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
+
 
 [project.optional-dependencies]
 dev = [
     "bandit",
     "black",
     "build",
+    "coveralls",
     "mypy",
     "mypy-extensions",
     "pylint",
@@ -42,6 +45,7 @@ dev = [
     "types-python-dateutil",
     "typing_extensions",
 ]
+
 docs = [
     "sphinx",
     "sphinx-rtd-theme",
@@ -62,21 +66,22 @@ show_missing = true
 
 [tool.coverage.run]
 branch = true
-source = ["tests"]
 omit = ["*_test.py", "*/tests/*", "*__version__.py", "setup.py"]
+relative_files = true
+source = ["src"]
 
 
 [tool.flake8]
-ignore = "E203,E266,H106,H904,E133"
-max-line-length = 120
-max-complexity = 25
-hang-closing = true
 exclude = "tests"
+hang-closing = true
+ignore = "E203,E266,H106,H904,E133"
+max-complexity = 25
+max-line-length = 120
 
 
 [tool.mypy]
-ignore_missing_imports = true
 exclude = ['venv/*']
+ignore_missing_imports = true
 
 
 [tool.pylint.format]
@@ -84,8 +89,8 @@ max-line-length = "120"
 
 
 [tool.pylint.MASTER]
-ignore-paths = ["tests"]
 exit-zero = true
+ignore-paths = ["tests"]
 
 
 [tool.pylint.'MESSAGES CONTROL']
@@ -94,11 +99,11 @@ disable = "R0903,R0913,R0901,W0613,W0718,C0114,C0115,C0103,R1725,R0801,R1702,R09
 
 # https://docs.pytest.org/en/6.2.x/customize.html#pyproject-toml
 [tool.pytest.ini_options]
-addopts = "-s -v -x --strict-markers -m 'not extra' --doctest-modules --cov=."
-testpaths = ["tests"]
+addopts = "-s -v -x --strict-markers -m 'not extra' --doctest-modules"
 filterwarnings = [
     "ignore::UserWarning",
 ]
+testpaths = ["tests"]
 
 
 [tool.setuptools_scm]

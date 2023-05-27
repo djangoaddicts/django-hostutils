@@ -1,11 +1,10 @@
 on: [push]
 
-env:
-    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}    
-
 jobs:
   pytest:
     uses: davidslusser/actions/.github/workflows/coveralls.yaml@coveralls
+    secrets:
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
     with:
       src: "src"
       options: ""

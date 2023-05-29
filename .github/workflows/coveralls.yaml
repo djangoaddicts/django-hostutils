@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   pytest:
-    uses: davidslusser/actions/.github/workflows/coveralls.yaml@main
+    uses: davidslusser/actions_python_coveralls@latest
     with:
       src: "src"
       options: ""

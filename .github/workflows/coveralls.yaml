@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   pytest:
-    uses: davidslusser/actions_python_coveralls@latest
+    uses: davidslusser/actions_python_coveralls@v0.0.0-dev.1
     with:
       src: "src"
       options: ""

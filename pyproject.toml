@@ -99,7 +99,7 @@ disable = "R0903,R0913,R0901,W0613,W0718,C0114,C0115,C0103,R1725,R0801,R1702,R09
 
 # https://docs.pytest.org/en/6.2.x/customize.html#pyproject-toml
 [tool.pytest.ini_options]
-addopts = "-s -v -x --strict-markers -m 'not extra' --doctest-modules"
+# addopts = "-s -v -x --strict-markers -m 'not extra' --doctest-modules"
 filterwarnings = [
     "ignore::UserWarning",
 ]

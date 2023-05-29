@@ -32,8 +32,6 @@
         }
         .titlecard {
             height: 6rem;
-<!--            min-width: 148px;-->
-<!--            max-width: 475;-->
         }
         .titlecard .icon {
             color: var(--primary);
@@ -137,7 +135,7 @@
                     <ul class="list-group mx-auto justify-content-center" style="max-width: 93%; margin-top: .5%; margin-bottom: .5%">
                         {% for item in partition_lists %}
                         <li class="list-group-item bg-light shadow-sm hvr-grow mb-3">
-                            <a href="#" onClick="showInfo('{% url "hostutils:get_partition_stats" %}', '{{item.mountpoint}}', 'Partition Disk Usage: <small><i>{{item.mountpoint}}</i></small>', true);">
+                            <a href="#" hx-get="{% url 'hostutils:get_partition_stats' %}?part={{ item.mountpoint }}" hx-target="#modal_wrapper">
                                 <div class="row mb-1">
                                     <div class="col-xs-12 col-md-3"><span class="key">Device:</span><span class="value">{{ item.device }}</span></div>
                                     <div class="col-xs-12 col-md-2"><span class="key">Filesystem:</span><span class="value">{{ item.fstype }}</span></div>
@@ -227,5 +225,5 @@
 });
 </script>
 
-{% include 'handyhelpers/component/bs5/modals.htm' %}
+{% include 'handyhelpers/htmx/bs5/generic_modal.htm' %}
 {% endblock content %}

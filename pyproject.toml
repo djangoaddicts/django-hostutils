@@ -38,7 +38,7 @@ dev = [
     "coveralls",
     "mypy",
     "mypy-extensions",
-    "pylint",
+    "ruff",
     "pytest",
     "pytest-cov",
     "pytest-django",
@@ -84,19 +84,6 @@ exclude = ['venv/*']
 ignore_missing_imports = true
 
 
-[tool.pylint.format]
-max-line-length = "120"
-
-
-[tool.pylint.MASTER]
-exit-zero = true
-ignore-paths = ["tests"]
-
-
-[tool.pylint.'MESSAGES CONTROL']
-disable = "R0903,R0913,R0901,W0613,W0718,C0114,C0115,C0103,R1725,R0801,R1702,R0912"
-
-
 # https://docs.pytest.org/en/6.2.x/customize.html#pyproject-toml
 [tool.pytest.ini_options]
 addopts = "-s -v -x --strict-markers -m 'not extra' --doctest-modules"
@@ -104,6 +91,10 @@ filterwarnings = [
     "ignore::UserWarning",
 ]
 testpaths = ["tests"]
+
+
+[tool.ruff]
+line-length = 120
 
 
 [tool.setuptools_scm]

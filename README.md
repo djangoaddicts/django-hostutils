@@ -69,9 +69,11 @@ https://github.com/davidslusser/django-hostutils/blob/docs/LICENSE
 <br/>
 
 ## Usage
+
+### Inlcuded Views
 Several pages are available. If you have a Bootstrap 5 nav-menu you can add the following snippet in your navbar where appropriate:
 
-```
+```python
 {% include 'hostutils/bs5/snippets/hostutils_nav_menu.htm' %}
 ```
 
@@ -79,36 +81,49 @@ Individual pages can also be linked directly:
 
 - Host overview page: 
 
-    ```
+    ```python
     {% url 'hostutils:host_details' %}
     ```
 
 - CPU stats page: 
 
-    ```
+    ```python
     {% url 'hostutils:host_cpu' %}
     ```
 
 - Disk stats page: 
 
-    ```
+    ```python
     {% url 'hostutils:host_disk' %}
     ```
 
 - Memory stats page: 
 
-    ```
+    ```python
     {% url 'hostutils:host_memory' %}
     ```
 
 - Network stats page: 
 
-    ```
+    ```python
     {% url 'hostutils:host_network' %}
     ```
 
 - Process stats page: 
 
-    ```
+    ```python
     {% url 'hostutils:host_process' %}
+    ```
+
+### Custom Views
+Custom views/templates can be used to override the Bootstrap 5 templates provided by default for GUI views. In your views, import the desired views(s) from hostutils and create a class that inherits the desired hostutils view.
+
+Here is an example of creating a custom view using ShowHost:
+
+    ```python
+    from djangoaddicts.hostutils.views import ShowHost
+
+    class MyCustomShowHostView(ShowHost):
+        template_name = "my_custom_template.html"
+        title = "My Custom Title"
     ```

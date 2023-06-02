@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   bandit:
-    uses: davidslusser/actions/.github/workflows/bandit.yaml@main
+    uses: davidslusser/actions_python_bandit@v1.0.0
     with:
       src: "src"
       options: "-c pyproject.toml -r"

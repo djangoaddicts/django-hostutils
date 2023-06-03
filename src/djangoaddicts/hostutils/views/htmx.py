@@ -11,6 +11,7 @@ from djangoaddicts.hostutils.forms import HostProcessFilterForm
 
 
 class GetHostCpuStats(BuildBootstrapModalView):
+    """ Get statistics for a given CPU"""
     modal_button_close = None
     modal_button_submit = "Close"
     modal_size = "modal-lg"
@@ -32,6 +33,7 @@ class GetHostCpuStats(BuildBootstrapModalView):
 
 
 class GetHostNetworkStats(BuildBootstrapModalView):
+    """ Get statistics for a given network interface"""
     modal_button_close = None
     modal_button_submit = "Close"
     modal_size = "modal-lg"
@@ -49,6 +51,7 @@ class GetHostNetworkStats(BuildBootstrapModalView):
 
 
 class GetHostParitionStats(BuildBootstrapModalView):
+    """ Get statistics for a given disk partition"""
     modal_button_close = None
     modal_button_submit = "Close"
     modal_title = "Partition Details"
@@ -66,6 +69,7 @@ class GetHostParitionStats(BuildBootstrapModalView):
 
 
 class GetHostProcesses(View):
+    """ Get host processes """
     @staticmethod
     def get_process_count(process_list: list, status: str) -> int:
         """get a count of processes for a given status
@@ -146,6 +150,7 @@ class GetHostProcesses(View):
 
 
 class GetHostProcessStats(BuildBootstrapModalView):
+    """ Get statistics for a given process"""
     modal_button_close = None
     modal_button_submit = "Close"
     modal_size = "modal-lg"
@@ -177,5 +182,3 @@ class GetHostProcessStats(BuildBootstrapModalView):
             pass
         self.modal_body = loader.render_to_string("hostutils/bs5/htmx/get_process_stats.htm", context=context)
         return super().get(request, *args, **kwargs)
-
-

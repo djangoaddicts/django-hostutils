@@ -11,13 +11,6 @@ https://github.com/davidslusser/django-hostutils
 
 
 |
-AJAX Views
----------
-.. automodule:: djangoaddicts.hostutils.views.ajax
-    :members: GetHostCpuStats, GetHostNetworkStats, GetHostParitionStats, GetHostProcessStats
-
-
-|
 GUI Views
 ---------
 .. automodule:: djangoaddicts.hostutils.views.gui
@@ -28,6 +21,6 @@ GUI Views
 HTMX Views
 ---------
 .. automodule:: djangoaddicts.hostutils.views.htmx
-    :members: GetHostProcesses
+    :members: GetHostCpuStats, GetHostNetworkStats, GetHostParitionStats, GetHostProcesses, GetHostProcessStats
 
 |

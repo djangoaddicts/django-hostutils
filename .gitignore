@@ -132,3 +132,4 @@ dmypy.json
 local_test
 .vscode
 *__version__.py
+.ruff_cache

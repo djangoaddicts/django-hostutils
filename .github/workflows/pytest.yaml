@@ -7,7 +7,5 @@ jobs:
     steps:
       - uses: davidslusser/actions_python_pytest@test
         with:
-          src: "src"
-          options: "-v"
           pip_install_command: "pip install -e .[dev]"
           python_version: "3.11"

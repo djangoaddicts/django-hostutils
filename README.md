@@ -70,7 +70,7 @@ https://github.com/davidslusser/django-hostutils/blob/docs/LICENSE
 
 ## Usage
 
-### Inlcuded Views
+### Included Views
 Several pages are available. If you have a Bootstrap 5 nav-menu you can add the following snippet in your navbar where appropriate:
 
 ```python

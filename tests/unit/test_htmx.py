@@ -105,3 +105,106 @@ class GetHostProcessessTests(TestCase):
                 self.client.get(self.url, data={"status": "running", 
                                                 "created_at__lte": self.now - timezone.timedelta(days=1)}, 
                                 **self.headers)
+
+
+class GetHostCpuStatsTests(TestCase):
+    """test GetHostCpuStats htmx view"""
+    def setUp(self):
+        super(GetHostCpuStatsTests, self).setUp()
+        self.url = reverse("hostutils:get_cpu_stats", kwargs={"cpu": 1})
+        self.headers = dict(HTTP_HX_REQUEST="true")
+
+    def test_get(self):
+        response = self.client.get(self.url, **self.headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "hostutils/bs5/htmx/get_cpu_stats.htm")
+
+    def test_get_with_invalid_data(self):
+        url = reverse("hostutils:get_cpu_stats", kwargs={"cpu": 99})
+        response = self.client.get(url, **self.headers)
+        self.assertEqual(response.status_code, 400)
+
+    def test_get_with_invalid_request(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 400)
+
+
+
+class GetHostNetworkStatsTests(TestCase):
+    """test GetHostNetworkStats htmx view"""
+    def setUp(self):
+        super(GetHostNetworkStatsTests, self).setUp()
+        self.url = reverse("hostutils:get_interface_stats", kwargs={"interface": "lo"})
+        self.headers = dict(HTTP_HX_REQUEST="true")
+
+    def test_get(self):
+        response = self.client.get(self.url, **self.headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "hostutils/bs5/htmx/get_interface_stats.htm")
+
+    def test_get_with_invalid_data(self):
+        url = reverse("hostutils:get_interface_stats", kwargs={"interface": "blah"})
+        response = self.client.get(url, **self.headers)
+        self.assertEqual(response.status_code, 400)
+
+    def test_get_with_invalid_request(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 400)
+
+
+class GetHostParitionStatsTests(TestCase):
+    """test GetHostParitionStats htmx view"""
+    def setUp(self):
+        super(GetHostParitionStatsTests, self).setUp()
+        self.url = reverse("hostutils:get_partition_stats") + "?part=/"
+        self.headers = dict(HTTP_HX_REQUEST="true")
+
+    def test_get(self):
+        response = self.client.get(self.url, **self.headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "hostutils/bs5/htmx/get_partition_stats.htm")
+
+    def test_get_with_invalid_data(self):
+        url = reverse("hostutils:get_partition_stats") + "?part=blah"
+        response = self.client.get(url, **self.headers)
+        self.assertEqual(response.status_code, 400)
+
+    def test_get_with_invalid_request(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 400)
+
+
+class GetHostProcessStatsTests(TestCase):
+    """test GetHostProcessStats htmx view"""
+    def setUp(self):
+        super(GetHostProcessStatsTests, self).setUp()
+        self.url = reverse("hostutils:get_process_stats", kwargs={"pid": 1})
+        self.headers = dict(HTTP_HX_REQUEST="true")
+
+    def test_get(self):
+        response = self.client.get(self.url, **self.headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "hostutils/bs5/htmx/get_process_stats.htm")
+
+    def test_access_denied(self):
+        with patch("psutil.Process") as mocked_process:
+            mocked_process.side_effect = psutil.AccessDenied
+            response = self.client.get(self.url, **self.headers)
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, "hostutils/bs5/htmx/get_process_stats.htm")
+
+    def test_exe(self):
+        with patch("psutil.Process") as mocked_process:
+            mocked_process.exe = object
+            response = self.client.get(self.url, **self.headers)
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, "hostutils/bs5/htmx/get_process_stats.htm")
+
+    def test_get_with_invalid_data(self):
+        url = reverse("hostutils:get_process_stats", kwargs={"pid": 0})
+        response = self.client.get(url, **self.headers)
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_with_invalid_request(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 400)

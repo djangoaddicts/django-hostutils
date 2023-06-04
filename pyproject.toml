@@ -42,8 +42,12 @@ dev = [
     "pytest",
     "pytest-cov",
     "pytest-django",
+    "safety",
+    "setuptools >= 67.7.2",
+	"setuptools_scm >= 7.1",
     "types-python-dateutil",
     "typing_extensions",
+    "wheel >= 0.40.0",
 ]
 
 docs = [

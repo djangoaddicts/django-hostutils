@@ -120,8 +120,8 @@ Individual pages can also be linked directly:
 ### Custom Views
 Custom views/templates can be used to override the Bootstrap 5 templates provided by default for GUI views. In your views, import the desired views(s) from hostutils and create a class that inherits the desired hostutils view.
 
-Here is an example of creating a custom view using ShowHost:
-
+- Here is an example of creating a custom view using ShowHost:
+    
     ```python
     from djangoaddicts.hostutils.views import ShowHost
 

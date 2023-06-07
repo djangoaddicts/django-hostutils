@@ -5,18 +5,19 @@
 {% block local_head %}
     {% include 'handyhelpers/component/chartjs_components.htm' %}
     <style>
+        .card a { text-decoration: none; }
         .card .card-header {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-weight: bold;
             font-size: 1.25rem;
         }
         .key {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-weight: bold;
             margin-right: .25rem
         }
         .value {
-            color: var(--secondary);
+            color: var(--bs-secondary);
             margin-left: .25rem
         }
         .titlecard-container {
@@ -34,20 +35,20 @@
             height: 6rem;
         }
         .titlecard .icon {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-size: 2.5rem;
             text-align: left;
             margin-top: -.5rem;
         }
         .titlecard .stat {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-size: 2rem;
             font-weight: bold;
             text-align: center;
             margin-top: -.5rem;
         }
         .titlecard .description {
-            color: var(--secondary);
+            color: var(--bs-secondary);
             font-weight: bold;
             font-size: .8rem;
             text-align: center;
@@ -159,8 +160,8 @@
 <script>
     var style = getComputedStyle(document.body);
     var theme = {};
-    theme.primary = style.getPropertyValue('--primary');
-    theme.secondary = style.getPropertyValue('--secondary');
+    theme.primary = style.getPropertyValue('--bs-primary');
+    theme.secondary = style.getPropertyValue('--bs-secondary');
     new Chart(document.getElementById("disk-usage-chart"), {
     type: 'pie',
     data: {
@@ -193,8 +194,8 @@
 <script>
     var style = getComputedStyle(document.body);
     var theme = {};
-    theme.primary = style.getPropertyValue('--primary');
-    theme.secondary = style.getPropertyValue('--secondary');
+    theme.primary = style.getPropertyValue('--bs-primary');
+    theme.secondary = style.getPropertyValue('--bs-secondary');
     new Chart(document.getElementById("disk-io-chart"), {
     type: 'bar',
     data: {

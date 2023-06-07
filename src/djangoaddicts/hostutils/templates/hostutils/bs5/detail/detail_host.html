@@ -4,6 +4,7 @@
 
 {% block local_head %}
     <style>
+        .card a { text-decoration: none; }
         .titlecard-container {
             display: flex;
             gap: 2rem;
@@ -19,23 +20,24 @@
             height: 8rem;
             min-width: 250px;
             max-width: 475;
-            color: var(--light);
+            color: var(--bs-light);
+            text-decoration: none;
         }
         .titlecard .icon {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-size: 2.5rem;
             text-align: left;
             margin-top: -.5rem;
         }
         .titlecard .stat {
-            color: var(--primary);
+            color: var(--bs-secondary);
             font-size: 2rem;
             font-weight: bold;
             text-align: right;
             margin-top: -.5rem;
         }
         .titlecard .description {
-            color: var(--secondary);
+            color: var(--bs-primary);
             font-weight: bold;
             font-size: 1.25rem;
             text-align: left;
@@ -53,7 +55,7 @@
             min-width: 22rem;
         }
         .datacard .card-header {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-weight: bold;
             font-size: 1.25rem;
         }
@@ -61,11 +63,11 @@
             min-height: 17rem;
         }
         .datacard .key {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-weight: bold;
         }
         .datacard .value {
-            color: var(--secondary);
+            color: var(--bs-secondary);
         }
     </style>
 {% endblock %}
@@ -111,7 +113,6 @@
                     </div>
                 </a>
             </div>
-
             <div class="card titlecard shadow hvr-grow">
                 <a href="{% url 'hostutils:host_disk' %}">
                     <div class="card-body">
@@ -123,7 +124,6 @@
                     </div>
                 </a>
             </div>
-
             <div class="card titlecard shadow hvr-grow">
                 <a href="{% url 'hostutils:host_process' %}">
                     <div class="card-body">
@@ -135,7 +135,6 @@
                     </div>
                 </a>
             </div>
-
             <div class="card titlecard shadow hvr-grow">
                 <a href="{% url 'hostutils:host_network' %}">
                     <div class="card-body">
@@ -147,7 +146,6 @@
                     </div>
                 </a>
             </div>
-
         </div>
     </div>
 </section>
@@ -189,7 +187,6 @@
                         <div class="col-8 value">{{ platform.nodename }}</div>
                     </div>
                     <div class="row">
-
                     </div>
                 </div>
             </div>
@@ -198,31 +195,31 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-4 key">Total: </div>
-                        <div class="col-8 value">{{ memory.total|byte_size }}<small class="ml-3">({{ memory.total }})</small></div>
+                        <div class="col-8 value">{{ memory.total|byte_size }}<small class="ms-2">({{ memory.total }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Available: </div>
-                        <div class="col-8 value">{{ memory.available|byte_size }}<small class="ml-3">({{ memory.available }})</small></div>
+                        <div class="col-8 value">{{ memory.available|byte_size }}<small class="ms-2">({{ memory.available }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Used: </div>
-                        <div class="col-8 value">{{ memory.used|byte_size }}<small class="ml-3">({{ memory.used }})</small></div>
+                        <div class="col-8 value">{{ memory.used|byte_size }}<small class="ms-2">({{ memory.used }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Free: </div>
-                        <div class="col-8 value">{{ memory.free|byte_size }}<small class="ml-3">({{ memory.free }})</small></div>
+                        <div class="col-8 value">{{ memory.free|byte_size }}<small class="ms-2">({{ memory.free }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Active: </div>
-                        <div class="col-8 value">{{ memory.active|byte_size }}<small class="ml-3">({{ memory.active }})</small></div>
+                        <div class="col-8 value">{{ memory.active|byte_size }}<small class="ms-2">({{ memory.active }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Inactive: </div>
-                        <div class="col-8 value">{{ memory.inactive|byte_size }}<small class="ml-3">({{ memory.inactive }})</small></div>
+                        <div class="col-8 value">{{ memory.inactive|byte_size }}<small class="ms-2">({{ memory.inactive }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Buffers: </div>
-                        <div class="col-8 value">{{ memory.buffers|byte_size }}<small class="ml-3">({{ memory.buffers }})</small></div>
+                        <div class="col-8 value">{{ memory.buffers|byte_size }}<small class="ms-2">({{ memory.buffers }})</small></div>
                     </div>
                 </div>
             </div>
@@ -231,32 +228,32 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-4 key">Total: </div>
-                        <div class="col-8 value">{{ disk_usage.total|byte_size }}<small class="ml-3">({{ disk_usage.total }})</small></div>
+                        <div class="col-8 value">{{ disk_usage.total|byte_size }}<small class="ms-2">({{ disk_usage.total }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Used: </div>
-                        <div class="col-8 value">{{ disk_usage.used|byte_size }}<small class="ml-3">({{ disk_usage.used }})</small></div>
+                        <div class="col-8 value">{{ disk_usage.used|byte_size }}<small class="ms-2">({{ disk_usage.used }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Free: </div>
-                        <div class="col-8 value">{{ disk_usage.free|byte_size }}<small class="ml-3">({{ disk_usage.free }})</small></div>
+                        <div class="col-8 value">{{ disk_usage.free|byte_size }}<small class="ms-2">({{ disk_usage.free }})</small></div>
                     </div>
                     <div class="row mb-2"></div>
                     <div class="row mb-2">
                         <div class="col-4 key">Read Count: </div>
-                        <div class="col-8 value">{{ disk_io_counters.read_count|byte_size }}<small class="ml-3">({{ disk_io_counters.read_count }})</small></div>
+                        <div class="col-8 value">{{ disk_io_counters.read_count|byte_size }}<small class="ms-2">({{ disk_io_counters.read_count }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Read Bytes: </div>
-                        <div class="col-8 value">{{ disk_io_counters.read_bytes|byte_size }}<small class="ml-3">({{ disk_io_counters.read_bytes }})</small></div>
+                        <div class="col-8 value">{{ disk_io_counters.read_bytes|byte_size }}<small class="ms-2">({{ disk_io_counters.read_bytes }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Write Count: </div>
-                        <div class="col-8 value">{{ disk_io_counters.write_count|byte_size }}<small class="ml-3">({{ disk_io_counters.write_count }})</small></div>
+                        <div class="col-8 value">{{ disk_io_counters.write_count|byte_size }}<small class="ms-2">({{ disk_io_counters.write_count }})</small></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 key">Write Bytes: </div>
-                        <div class="col-8 value">{{ disk_io_counters.write_bytes|byte_size }}<small class="ml-3">({{ disk_io_counters.write_bytes }})</small></div>
+                        <div class="col-8 value">{{ disk_io_counters.write_bytes|byte_size }}<small class="ms-2">({{ disk_io_counters.write_bytes }})</small></div>
                     </div>
                 </div>
             </div>

@@ -6,17 +6,17 @@
     {% include 'handyhelpers/component/chartjs_components.htm' %}
     <style>
         .card .card-header {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-weight: bold;
             font-size: 1.25rem;
         }
         .key {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-weight: bold;
             margin-right: .25rem
         }
         .value {
-            color: var(--secondary);
+            color: var(--bs-secondary);
             margin-left: .25rem
         }
         .titlecard-container {
@@ -31,14 +31,14 @@
             height: 8rem;
         }
         .titlecard .stat {
-            color: var(--primary);
+            color: var(--bs-primary);
             font-size: 2.5rem;
             font-weight: bold;
             text-align: center;
             margin-top: -.75rem;
         }
         .titlecard .description {
-            color: var(--secondary);
+            color: var(--bs-secondary);
             font-weight: bold;
             font-size: 1rem;
             text-align: center;
@@ -181,8 +181,8 @@
 <script>
     var style = getComputedStyle(document.body);
     var theme = {};
-    theme.primary = style.getPropertyValue('--primary');
-    theme.secondary = style.getPropertyValue('--secondary');
+    theme.primary = style.getPropertyValue('--bs-primary');
+    theme.secondary = style.getPropertyValue('--bs-secondary');
     new Chart(document.getElementById("virtual-usage-chart"), {
     type: 'pie',
     data: {
@@ -215,15 +215,15 @@
 <script>
     var style = getComputedStyle(document.body);
     var theme = {};
-    theme.primary = style.getPropertyValue('--primary');
-    theme.secondary = style.getPropertyValue('--secondary');
-    theme.success = style.getPropertyValue('--success');
-    theme.info = style.getPropertyValue('--info');
-    theme.warning = style.getPropertyValue('--warning');
-    theme.danger = style.getPropertyValue('--danger');
-    theme.dark = style.getPropertyValue('--dark');
-    theme.blue = style.getPropertyValue('--blue');
-    theme.indigo = style.getPropertyValue('--indigo');
+    theme.primary = style.getPropertyValue('--bs-primary');
+    theme.secondary = style.getPropertyValue('--bs-secondary');
+    theme.success = style.getPropertyValue('--bs-success');
+    theme.info = style.getPropertyValue('--bs-info');
+    theme.warning = style.getPropertyValue('--bs-warning');
+    theme.danger = style.getPropertyValue('--bs-danger');
+    theme.dark = style.getPropertyValue('--bs-dark');
+    theme.blue = style.getPropertyValue('--bs-blue');
+    theme.indigo = style.getPropertyValue('--bs-indigo');
 
     new Chart(document.getElementById("virtual-stats-chart"), {
     type: 'bar',
@@ -258,8 +258,8 @@
 <script>
     var style = getComputedStyle(document.body);
     var theme = {};
-    theme.primary = style.getPropertyValue('--primary');
-    theme.secondary = style.getPropertyValue('--secondary');
+    theme.primary = style.getPropertyValue('--bs-primary');
+    theme.secondary = style.getPropertyValue('--bs-secondary');
     new Chart(document.getElementById("swap-usage-chart"), {
     type: 'pie',
     data: {
@@ -292,8 +292,8 @@
 <script>
     var style = getComputedStyle(document.body);
     var theme = {};
-    theme.primary = style.getPropertyValue('--primary');
-    theme.secondary = style.getPropertyValue('--secondary');
+    theme.primary = style.getPropertyValue('--bs-primary');
+    theme.secondary = style.getPropertyValue('--bs-secondary');
     new Chart(document.getElementById("swap-disk-chart"), {
     type: 'bar',
     data: {

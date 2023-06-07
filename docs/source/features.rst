@@ -6,7 +6,7 @@ Bootstrap 5 dashboard pages are provided for host summary, CPU status, disk part
 
 
 | 
-Build In Views
+Built-in Views
 ----------------
 
 

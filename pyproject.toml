@@ -13,8 +13,22 @@ authors = [
     {name = "David Slusser", email = "dbslusser@gmail.com"},
 ]
 classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
     "Framework :: Django",
-    "Programming Language :: Python :: 3",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.0",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 4.2",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
     "django",
@@ -88,7 +102,7 @@ profile = "black"
 
 
 [tool.mypy]
-exclude = ['venv/*']
+exclude = ["venv/*"]
 ignore_missing_imports = true
 
 

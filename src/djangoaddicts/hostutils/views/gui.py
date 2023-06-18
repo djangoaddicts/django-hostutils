@@ -1,6 +1,6 @@
 import datetime
-import psutil
 
+import psutil
 from dateutil.relativedelta import relativedelta
 from django.shortcuts import render
 from django.views.generic import View

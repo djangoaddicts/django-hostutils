@@ -1,8 +1,10 @@
 # django-hostutils
 [![Downloads](https://static.pepy.tech/badge/django-hostutils)](https://pepy.tech/project/django-hostutils)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7474/badge)](https://bestpractices.coreinfrastructure.org/projects/7474)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-hostutils)
 
-Host utilities package for django projects. Bootstrap 5 templates are provided.  Host metric data includes:
+
+Django hostutils is a collection of utilities to provide information and metrics for hosts running a Django project. Data is available via included Bootstrap 5 templates and custom views/templates also be used. Host metric data includes:
 - Host OS, release, uptime
 - CPU count and utilization
 - Memory usage
@@ -10,14 +12,6 @@ Host utilities package for django projects. Bootstrap 5 templates are provided. 
 - Processes running, idle, sleeping
 - Network interfaces and connections
 
-
-<br/>
-
-| | |
-|--------------|------|
-| Author       | David Slusser |
-| Description  | Host utilities package for django projects. |
-| Requirements | `Python 3.x` +<br>`Django 3.2.x` + |
 
 <br/>
 
@@ -34,10 +28,12 @@ Host utilities package for django projects. Bootstrap 5 templates are provided. 
 |Ruff|static code analysis|![Ruff](https://github.com/djangoaddicts/django-hostutils/actions/workflows/ruff.yaml/badge.svg)|
 |Safety|security vulnerability checks|![Saftey](https://github.com/djangoaddicts/django-hostutils/actions/workflows/safety.yaml/badge.svg)|
 
+
 <br/>
 
 ### Code Coverage Dashboard:
 https://coveralls.io/github/djangoaddicts/django-hostutils
+
 
 <br/>
 
@@ -50,12 +46,14 @@ Full documentation is available here:
 
 https://django-hostutils.readthedocs.io/en/latest/index.html 
 
+
 <br/>
 
 ## License
 django-hostutils is licensed under the GNU-3 license (see the LICENSE file for details).
 
 https://github.com/davidslusser/django-hostutils/blob/docs/LICENSE 
+
 
 <br/>
 
@@ -74,6 +72,7 @@ https://github.com/davidslusser/django-hostutils/blob/docs/LICENSE
    ```python
    path("hostutils/", include("djangoaddicts.hostutils.urls"), ),
    ```
+
 
 <br/>
 

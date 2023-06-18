@@ -27,7 +27,7 @@ Host utilities package for django projects. Bootstrap 5 templates are provided. 
 |Bandit|security checks|![Bandit](https://github.com/djangoaddicts/django-hostutils/actions/workflows/bandit.yaml/badge.svg)|
 |Black|code formatting|![Black](https://github.com/djangoaddicts/django-hostutils/actions/workflows/black.yaml/badge.svg)|
 |Coveralls|code coverage status|[![Coverage Status](https://coveralls.io/repos/github/djangoaddicts/django-hostutils/badge.svg?branch=coveralls)](https://coveralls.io/github/djangoaddicts/django-hostutils?branch=coveralls)|
-|Isort|python import ordering|![Mypy](https://github.com/djangoaddicts/django-hostutils/actions/workflows/isort.yaml/badge.svg)|
+|Isort|python import ordering|![Isort](https://github.com/djangoaddicts/django-hostutils/actions/workflows/isort.yaml/badge.svg)|
 |Mypy|static type checking|![Mypy](https://github.com/djangoaddicts/django-hostutils/actions/workflows/mypy.yaml/badge.svg)|
 |Pytest|unit testing|![Pytest](https://github.com/djangoaddicts/django-hostutils/actions/workflows/pytest.yaml/badge.svg)|
 |Radon|code complexity analysis|![Radon](https://github.com/djangoaddicts/django-hostutils/actions/workflows/radon.yaml/badge.svg)|
@@ -60,8 +60,11 @@ https://github.com/davidslusser/django-hostutils/blob/docs/LICENSE
 <br/>
 
 ## Installation 
-- pip install django-hostutils
-- add the following to your INSTALLED_APPS
+- install via pip:
+    ``` 
+    pip install django-hostutils
+    ```
+- add the following to your INSTALLED_APPS in settings.py:
 
     ```python 
     djangoaddicts.hostutils

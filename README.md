@@ -1,8 +1,9 @@
 # django-hostutils
 [![Downloads](https://static.pepy.tech/badge/django-hostutils)](https://pepy.tech/project/django-hostutils)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7474/badge)](https://bestpractices.coreinfrastructure.org/projects/7474)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-hostutils)
 
+![PyPI - Python](https://img.shields.io/pypi/pyversions/django-hostutils)
+![PyPI - Django](https://img.shields.io/pypi/djversions/django-hostutils)
 
 Django hostutils is a collection of utilities to provide information and metrics for hosts running a Django project. Data is available via included Bootstrap 5 templates and custom views/templates also be used. Host metric data includes:
 - Host OS, release, uptime
@@ -52,7 +53,7 @@ https://django-hostutils.readthedocs.io/en/latest/index.html
 ## License
 django-hostutils is licensed under the GNU-3 license (see the LICENSE file for details).
 
-https://github.com/davidslusser/django-hostutils/blob/docs/LICENSE 
+https://github.com/djangoaddicts/django-hostutils/blob/docs/LICENSE 
 
 
 <br/>

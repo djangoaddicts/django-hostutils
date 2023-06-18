@@ -7,10 +7,10 @@ from djangoaddicts.hostutils.views.gui import (
     ShowHostProcesses,
 )
 from djangoaddicts.hostutils.views.htmx import (
-    GetHostProcesses,
     GetHostCpuStats,
     GetHostNetworkStats,
     GetHostParitionStats,
+    GetHostProcesses,
     GetHostProcessStats,
 )
 

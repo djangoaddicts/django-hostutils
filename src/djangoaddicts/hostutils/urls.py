@@ -1,6 +1,6 @@
 from django.urls import path
-from djangoaddicts.hostutils.views import gui
-from djangoaddicts.hostutils.views import htmx
+
+from djangoaddicts.hostutils.views import gui, htmx
 
 app_name = "hostutils"
 
@@ -18,5 +18,4 @@ urlpatterns = [
     path("get_interface_stats/<str:interface>/", htmx.GetHostNetworkStats.as_view(), name="get_interface_stats"),
     path("get_partition_stats/", htmx.GetHostParitionStats.as_view(), name="get_partition_stats"),
     path("get_process_stats/<int:pid>/", htmx.GetHostProcessStats.as_view(), name="get_process_stats"),
-
 ]

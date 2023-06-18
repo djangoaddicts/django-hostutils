@@ -1,4 +1,5 @@
 import datetime
+
 import psutil
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -11,7 +12,8 @@ from djangoaddicts.hostutils.forms import HostProcessFilterForm
 
 
 class GetHostCpuStats(BuildBootstrapModalView):
-    """ Get statistics for a given CPU"""
+    """Get statistics for a given CPU"""
+
     modal_button_close = None
     modal_button_submit = "Close"
     modal_size = "modal-lg"
@@ -22,10 +24,11 @@ class GetHostCpuStats(BuildBootstrapModalView):
         self.modal_subtitle = kwargs["cpu"]
         try:
             cpu = kwargs["cpu"]
-            context = {"time": psutil.cpu_times(percpu=True)[cpu],
-                       "time_percent": psutil.cpu_times_percent(percpu=True)[cpu],
-                       "frequency": psutil.cpu_freq(percpu=True)[cpu],
-                       }
+            context = {
+                "time": psutil.cpu_times(percpu=True)[cpu],
+                "time_percent": psutil.cpu_times_percent(percpu=True)[cpu],
+                "frequency": psutil.cpu_freq(percpu=True)[cpu],
+            }
         except IndexError:
             return HttpResponse("Invalid request", status=400)
         self.modal_body = loader.render_to_string("hostutils/bs5/htmx/get_cpu_stats.htm", context=context)
@@ -33,7 +36,8 @@ class GetHostCpuStats(BuildBootstrapModalView):
 
 
 class GetHostNetworkStats(BuildBootstrapModalView):
-    """ Get statistics for a given network interface"""
+    """Get statistics for a given network interface"""
+
     modal_button_close = None
     modal_button_submit = "Close"
     modal_size = "modal-lg"
@@ -51,17 +55,18 @@ class GetHostNetworkStats(BuildBootstrapModalView):
 
 
 class GetHostParitionStats(BuildBootstrapModalView):
-    """ Get statistics for a given disk partition"""
+    """Get statistics for a given disk partition"""
+
     modal_button_close = None
     modal_button_submit = "Close"
     modal_title = "Partition Details"
 
     def get(self, request, *args, **kwargs):
         context = {}
-        part = request.GET.get('part', None)
+        part = request.GET.get("part", None)
         self.modal_subtitle = part
         try:
-            context['data'] = psutil.disk_usage(part)
+            context["data"] = psutil.disk_usage(part)
         except FileNotFoundError:
             return HttpResponse("Invalid request", status=400)
         self.modal_body = loader.render_to_string("hostutils/bs5/htmx/get_partition_stats.htm", context=context)
@@ -69,7 +74,8 @@ class GetHostParitionStats(BuildBootstrapModalView):
 
 
 class GetHostProcesses(View):
-    """ Get host processes """
+    """Get host processes"""
+
     @staticmethod
     def get_process_count(process_list: list, status: str) -> int:
         """get a count of processes for a given status
@@ -150,7 +156,8 @@ class GetHostProcesses(View):
 
 
 class GetHostProcessStats(BuildBootstrapModalView):
-    """ Get statistics for a given process"""
+    """Get statistics for a given process"""
+
     modal_button_close = None
     modal_button_submit = "Close"
     modal_size = "modal-lg"
@@ -161,21 +168,22 @@ class GetHostProcessStats(BuildBootstrapModalView):
         self.modal_subtitle = kwargs["pid"]
         try:
             data = psutil.Process(kwargs["pid"])
-            context = {"pid": data.pid,
-                        "ppid": data.ppid(),
-                        "name": data.name(),
-                        "status": data.status(),
-                        "create_time": data.create_time(),
-                        "username": data.username(),
-                        "cmdline": data.cmdline(),
-                        "cpu_num": data.cpu_num(),
-                        "cpu_percent": data.cpu_percent(),
-                        "memory_percent": data.memory_percent(),
-                        "num_threads": data.num_threads(),
-                        "threads": data.threads(),
-                        }
-            context['cwd'] = data.cwd()
-            context['exe'] = data.exe()
+            context = {
+                "pid": data.pid,
+                "ppid": data.ppid(),
+                "name": data.name(),
+                "status": data.status(),
+                "create_time": data.create_time(),
+                "username": data.username(),
+                "cmdline": data.cmdline(),
+                "cpu_num": data.cpu_num(),
+                "cpu_percent": data.cpu_percent(),
+                "memory_percent": data.memory_percent(),
+                "num_threads": data.num_threads(),
+                "threads": data.threads(),
+            }
+            context["cwd"] = data.cwd()
+            context["exe"] = data.exe()
         except psutil.AccessDenied:
             pass
         except psutil.NoSuchProcess:

@@ -1,5 +1,6 @@
 # django-hostutils
 [![Downloads](https://static.pepy.tech/badge/django-hostutils)](https://pepy.tech/project/django-hostutils)
+[![PyPI](https://img.shields.io/pypi/v/django-hostutils?label=pypi%20package&color=blue)](https://pypi.org/project/django-hostutils/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7474/badge)](https://bestpractices.coreinfrastructure.org/projects/7474)
 
 ![PyPI - Python](https://img.shields.io/pypi/pyversions/django-hostutils)
@@ -22,7 +23,7 @@ Django hostutils is a collection of utilities to provide information and metrics
 |Bandit|security checks|![Bandit](https://github.com/djangoaddicts/django-hostutils/actions/workflows/bandit.yaml/badge.svg)|
 |Black|code formatting|![Black](https://github.com/djangoaddicts/django-hostutils/actions/workflows/black.yaml/badge.svg)|
 |CodeQL|security analysis|[![CodeQL](https://github.com/djangoaddicts/django-hostutils/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/djangoaddicts/django-hostutils/actions/workflows/github-code-scanning/codeql)|
-|Coveralls|code coverage status|[![Coverage Status](https://coveralls.io/repos/github/djangoaddicts/django-hostutils/badge.svg?branch=coveralls)](https://coveralls.io/github/djangoaddicts/django-hostutils?branch=coveralls)|
+|Coveralls|code coverage status|![Coverage Status](https://github.com/djangoaddicts/django-hostutils/actions/workflows/coveralls.yaml/badge.svg)|
 |Isort|python import ordering|![Isort](https://github.com/djangoaddicts/django-hostutils/actions/workflows/isort.yaml/badge.svg)|
 |Mypy|static type checking|![Mypy](https://github.com/djangoaddicts/django-hostutils/actions/workflows/mypy.yaml/badge.svg)|
 |Pytest|unit testing|![Pytest](https://github.com/djangoaddicts/django-hostutils/actions/workflows/pytest.yaml/badge.svg)|
@@ -31,23 +32,21 @@ Django hostutils is a collection of utilities to provide information and metrics
 |Safety|dependency scanner|![Saftey](https://github.com/djangoaddicts/django-hostutils/actions/workflows/safety.yaml/badge.svg)|
 
 
-<br/>
+### Code Coverage:
+[![Coverage Status](https://coveralls.io/repos/github/djangoaddicts/django-hostutils/badge.svg?branch=coveralls)](https://coveralls.io/github/djangoaddicts/django-hostutils?branch=coveralls)
 
-### Code Coverage Dashboard:
-https://coveralls.io/github/djangoaddicts/django-hostutils
+Dashboard: https://coveralls.io/github/djangoaddicts/django-hostutils
 
 
 <br/>
 
 ## Documentation
-| Workflow | Description             | Status                                                                       |
-|----------|-------------------------|------------------------------------------------------------------------------|
-|Docs|ReadTheDocs Build|[![Documentation Status](https://readthedocs.org/projects/django-hostutils/badge/?version=latest)](https://django-hostutils.readthedocs.io/en/latest/?badge=latest)|
 
-Full documentation is available here:
+[![Documentation Status](https://readthedocs.org/projects/django-hostutils/badge/?version=latest)](https://django-hostutils.readthedocs.io/en/latest/?badge=latest)
 
-https://django-hostutils.readthedocs.io/en/latest/index.html 
+Full documentation can be found on: https://django-hostutils.readthedocs.io/en/latest/index.html 
 
+Documentation source files are available in the [docs](https://github.com/djangoaddicts/django-hostutils/tree/main/docs/source) folder.
 
 <br/>
 

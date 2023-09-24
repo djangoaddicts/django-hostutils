@@ -21,7 +21,7 @@
                     <ul class="list-group mx-auto justify-content-center" style="max-width: 93%; margin-top: .5%; margin-bottom: .5%">
                         {% for item in process_list %}
                         <li class="list-group-item bg-light shadow-sm hvr-grow mb-3">
-                            <div hx-get="{% url 'hostutils:get_process_stats' item.pid %}" hx-target="#modal_wrapper">
+                            <div hx-get="{% url 'hostutils:get_process_stats' item.pid %}" hx-target="#modal_wrapper" data-bs-toggle="modal" data-bs-target="#modal_wrapper">
                                 <div class="row">
                                     <div class="col-xs-12 col-md-2"><span class="key">PID:</span><span class="value">{{ item.pid }}</span></div>
                                     <div class="col-xs-12 col-md-4"><span class="key">Name:</span><span class="value">{{ item.name }}</span></div>

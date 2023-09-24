@@ -158,8 +158,7 @@ class GetHostProcesses(View):
 class GetHostProcessStats(BuildBootstrapModalView):
     """Get statistics for a given process"""
 
-    modal_button_close = None
-    modal_button_submit = "Close"
+    modal_button_submit = None
     modal_size = "modal-lg"
     modal_title = "Process Details"
 

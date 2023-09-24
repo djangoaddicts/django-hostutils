@@ -32,7 +32,7 @@ classifiers = [
 ]
 dependencies = [
     "django",
-    "django-handyhelpers",
+    "django-handyhelpers>=0.3.11",
     "psutil",
 ]
 description = "host utilities for django projects"

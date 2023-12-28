@@ -15,3 +15,5 @@ Version History
    "0.0.5", "removing ajax view; using only htmx"
    "0.0.6", "updating templates for latest Bootstrap"
    "0.0.7", "adding isort; adding badges to readme"
+   "0.0.8", "fixed modal trigger on host process card"
+   "0.0.9", "fixed stale process handling in host process view"

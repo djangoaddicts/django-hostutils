@@ -77,24 +77,20 @@ class GetHostProcesses(View):
         """Get host prcesses"""
         context = {}
         filter_form = HostProcessFilterForm(request.GET or None)
-        counts = {
-            "running": 0,
-            "sleeping": 0,
-            "idle": 0,
-            "stopped": 0,
-            "zombie": 0,
-            "dead": 0,
-            "disk-sleep": 0
-        }
-        
+        counts = {"running": 0, "sleeping": 0, "idle": 0, "stopped": 0, "zombie": 0, "dead": 0, "disk-sleep": 0}
+
         process_list = []
         for process in psutil.process_iter():
             try:
                 counts[process.status()] += 1
-                process_list.append({"pid": process.pid, 
-                                     "name": process.name(), 
-                                     "status": process.status(), 
-                                     "started_at": process.create_time()})
+                process_list.append(
+                    {
+                        "pid": process.pid,
+                        "name": process.name(),
+                        "status": process.status(),
+                        "started_at": process.create_time(),
+                    }
+                )
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 continue
         context["counts"] = counts
@@ -143,7 +139,7 @@ class GetHostProcesses(View):
         context["filter_form"] = filter_form
         return render(request, template_name="hostutils/bs5/snippets/host_process_card_swap.htm", context=context)
 
-        
+
 class GetHostProcessStats(BuildBootstrapModalView):
     """Get statistics for a given process"""
 

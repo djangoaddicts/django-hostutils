@@ -6,7 +6,6 @@ from django.shortcuts import render
 from django.views.generic import View
 
 # import forms
-from djangoaddicts.hostutils.forms import HostProcessFilterForm
 
 
 class ShowHost(View):
@@ -139,23 +138,19 @@ class ShowHostProcesses(View):
         context["title"] = self.title
         context["now"] = datetime.datetime.now()
         context["subtitle"] = psutil.os.uname()[1]
-        counts = {
-            "running": 0,
-            "sleeping": 0,
-            "idle": 0,
-            "stopped": 0,
-            "zombie": 0,
-            "dead": 0,
-            "disk-sleep": 0
-        }
+        counts = {"running": 0, "sleeping": 0, "idle": 0, "stopped": 0, "zombie": 0, "dead": 0, "disk-sleep": 0}
         process_list = []
         for process in psutil.process_iter():
             try:
                 counts[process.status()] += 1
-                process_list.append({"pid": process.pid, 
-                                     "name": process.name(), 
-                                     "status": process.status(), 
-                                     "started_at": process.create_time()})
+                process_list.append(
+                    {
+                        "pid": process.pid,
+                        "name": process.name(),
+                        "status": process.status(),
+                        "started_at": process.create_time(),
+                    }
+                )
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 pass
         context["counts"] = counts

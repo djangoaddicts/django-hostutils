@@ -148,24 +148,16 @@ class ShowHostProcesses(View):
             "dead": 0,
             "disk-sleep": 0
         }
-        process_list = list(psutil.process_iter())
-        context["process_list"] = process_list
-        for process in process_list:
+        process_list = []
+        for process in psutil.process_iter():
             try:
                 counts[process.status()] += 1
-            except psutil.NoSuchProcess:
-                continue
-
+                process_list.append({"pid": process.pid, 
+                                     "name": process.name(), 
+                                     "status": process.status(), 
+                                     "started_at": process.create_time()})
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
         context["counts"] = counts
-        filter_form = {}
-        filter_form["form"] = HostProcessFilterForm(request.GET or None)
-        filter_form["modal_name"] = "filter_processes"
-        filter_form["modal_size"] = "modal-lg"
-        filter_form["modal_title"] = "Filter Host Processes"
-        filter_form["hx_method"] = "hx-get"
-        filter_form["hx_url"] = "/hostutils/get_host_processes"
-        filter_form["hx_target"] = "id_process_list_container"
-        filter_form["method"] = "GET"
-        filter_form["action"] = "Filter"
-        context["filter_form"] = filter_form
+        context["process_list"] = process_list
         return render(request, self.template_name, context=context)

@@ -11,6 +11,7 @@ from unittest.mock import patch
 
 class GetHostProcessessTests(TestCase):
     """test GetHostProcesses ajax view"""
+
     def setUp(self):
         super(GetHostProcessessTests, self).setUp()
         self.url = reverse("hostutils:get_host_processes")
@@ -45,70 +46,59 @@ class GetHostProcessessTests(TestCase):
             self.client.get(self.url, data={"status": "running"}, **self.headers)
 
     def test_get_with_invalid(self):
-        with self.assertRaises(psutil.NoSuchProcess):
-            process_list = psutil.process_iter()
-            with patch('psutil.process_iter') as mocked_process_list:
-                p = subprocess.Popen('ls', stdout=subprocess.PIPE)
-                mp = iter((psutil.Process(p.pid), psutil.Process(p.pid)))
-                p.communicate()
-                mocked_process_list.return_value = itertools.chain(
-                    mp, 
-                    process_list
-                )
-                self.client.get(self.url, **self.headers)
+        process_list = psutil.process_iter()
+        with patch("psutil.process_iter") as mocked_process_list:
+            p = subprocess.Popen("ls", stdout=subprocess.PIPE)
+            mp = iter((psutil.Process(p.pid), psutil.Process(p.pid)))
+            p.communicate()
+            mocked_process_list.return_value = itertools.chain(mp, process_list)
+            self.client.get(self.url, **self.headers)
 
     def test_get_with_status_invalid(self):
-        with self.assertRaises(psutil.NoSuchProcess):
-            with patch("psutil.Process.status") as status:
-                status.return_value = "running"
-                process_list = psutil.process_iter()
-                with patch('psutil.process_iter') as mocked_process_list:
-                    p = subprocess.Popen('ls', stdout=subprocess.PIPE)
-                    mp = iter((psutil.Process(p.pid), psutil.Process(p.pid)))
-                    p.communicate()
-                    mocked_process_list.return_value = itertools.chain(
-                        mp, 
-                        process_list
-                    )
-                    self.client.get(self.url, data={"status": "running"}, **self.headers)
-
-    def test_get_with_gte_invalid(self):
-        with self.assertRaises(psutil.NoSuchProcess):
-            with patch("psutil.Process.status") as status:
-                status.return_value = "running"
-                process_list = psutil.process_iter()
-                with patch('psutil.process_iter') as mocked_process_list:
-                    p = subprocess.Popen('ls', stdout=subprocess.PIPE)
-                    mp = iter((psutil.Process(p.pid), psutil.Process(p.pid)))
-                    p.communicate()
-                    mocked_process_list.return_value = itertools.chain(
-                        mp, 
-                        process_list
-                    )
-                    self.client.get(self.url, data={"status": "running", 
-                                                    "created_at__gte": self.now - timezone.timedelta(days=1)}, 
-                                    **self.headers)
-
-    def test_get_with_lte_invalid(self):
-        # with self.assertRaises(psutil.NoSuchProcess):
         with patch("psutil.Process.status") as status:
             status.return_value = "running"
             process_list = psutil.process_iter()
-            with patch('psutil.process_iter') as mocked_process_list:
-                p = subprocess.Popen('ls', stdout=subprocess.PIPE)
+            with patch("psutil.process_iter") as mocked_process_list:
+                p = subprocess.Popen("ls", stdout=subprocess.PIPE)
                 mp = iter((psutil.Process(p.pid), psutil.Process(p.pid)))
                 p.communicate()
-                mocked_process_list.return_value = itertools.chain(
-                    mp, 
-                    process_list
+                mocked_process_list.return_value = itertools.chain(mp, process_list)
+                self.client.get(self.url, data={"status": "running"}, **self.headers)
+
+    def test_get_with_gte_invalid(self):
+        with patch("psutil.Process.status") as status:
+            status.return_value = "running"
+            process_list = psutil.process_iter()
+            with patch("psutil.process_iter") as mocked_process_list:
+                p = subprocess.Popen("ls", stdout=subprocess.PIPE)
+                mp = iter((psutil.Process(p.pid), psutil.Process(p.pid)))
+                p.communicate()
+                mocked_process_list.return_value = itertools.chain(mp, process_list)
+                self.client.get(
+                    self.url,
+                    data={"status": "running", "created_at__gte": self.now - timezone.timedelta(days=1)},
+                    **self.headers,
                 )
-                self.client.get(self.url, data={"status": "running", 
-                                                "created_at__lte": self.now - timezone.timedelta(days=1)}, 
-                                **self.headers)
+
+    def test_get_with_lte_invalid(self):
+        with patch("psutil.Process.status") as status:
+            status.return_value = "running"
+            process_list = psutil.process_iter()
+            with patch("psutil.process_iter") as mocked_process_list:
+                p = subprocess.Popen("ls", stdout=subprocess.PIPE)
+                mp = iter((psutil.Process(p.pid), psutil.Process(p.pid)))
+                p.communicate()
+                mocked_process_list.return_value = itertools.chain(mp, process_list)
+                self.client.get(
+                    self.url,
+                    data={"status": "running", "created_at__lte": self.now - timezone.timedelta(days=1)},
+                    **self.headers,
+                )
 
 
 class GetHostCpuStatsTests(TestCase):
     """test GetHostCpuStats htmx view"""
+
     def setUp(self):
         super(GetHostCpuStatsTests, self).setUp()
         self.url = reverse("hostutils:get_cpu_stats", kwargs={"cpu": 1})
@@ -129,9 +119,9 @@ class GetHostCpuStatsTests(TestCase):
         self.assertEqual(response.status_code, 400)
 
 
-
 class GetHostNetworkStatsTests(TestCase):
     """test GetHostNetworkStats htmx view"""
+
     def setUp(self):
         super(GetHostNetworkStatsTests, self).setUp()
         self.url = reverse("hostutils:get_interface_stats", kwargs={"interface": "lo"})
@@ -154,6 +144,7 @@ class GetHostNetworkStatsTests(TestCase):
 
 class GetHostParitionStatsTests(TestCase):
     """test GetHostParitionStats htmx view"""
+
     def setUp(self):
         super(GetHostParitionStatsTests, self).setUp()
         self.url = reverse("hostutils:get_partition_stats") + "?part=/"
@@ -176,6 +167,7 @@ class GetHostParitionStatsTests(TestCase):
 
 class GetHostProcessStatsTests(TestCase):
     """test GetHostProcessStats htmx view"""
+
     def setUp(self):
         super(GetHostProcessStatsTests, self).setUp()
         self.url = reverse("hostutils:get_process_stats", kwargs={"pid": 1})

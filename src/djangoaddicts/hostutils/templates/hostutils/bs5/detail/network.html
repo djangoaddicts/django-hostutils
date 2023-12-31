@@ -141,7 +141,7 @@
                     <ul class="list-group mx-auto justify-content-center" style="max-width: 93%; margin-top: .5%; margin-bottom: .5%">
                         {% for k,v in interface_list.items %}
                         <li class="list-group-item bg-light shadow-sm hvr-grow mb-3">
-                            <a href="#" hx-get="{% url 'hostutils:get_interface_stats' k %}" hx-target="#modal_wrapper">
+                            <a href="#" hx-get="{% url 'hostutils:get_interface_stats' k %}" hx-target="#modal_wrapper" data-bs-toggle="modal" data-bs-target="#modal_wrapper">
                                 <div class="row">
                                     <div class="key h5">{{ k }}:</div>
                                     {% for item in v %}

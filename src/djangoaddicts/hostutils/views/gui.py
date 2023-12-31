@@ -6,7 +6,6 @@ from django.shortcuts import render
 from django.views.generic import View
 
 # import forms
-from djangoaddicts.hostutils.forms import HostProcessFilterForm
 
 
 class ShowHost(View):
@@ -139,26 +138,21 @@ class ShowHostProcesses(View):
         context["title"] = self.title
         context["now"] = datetime.datetime.now()
         context["subtitle"] = psutil.os.uname()[1]
-        process_list = list(psutil.process_iter())
-        context["process_list"] = process_list
-        counts = {
-            "running": len([i for i in process_list if i.status() == "running"]),
-            "sleeping": len([i for i in process_list if i.status() == "sleeping"]),
-            "idle": len([i for i in process_list if i.status() == "idle"]),
-            "stopped": len([i for i in process_list if i.status() == "stopped"]),
-            "zombie": len([i for i in process_list if i.status() == "zombie"]),
-            "dead": len([i for i in process_list if i.status() == "dead"]),
-        }
+        counts = {"running": 0, "sleeping": 0, "idle": 0, "stopped": 0, "zombie": 0, "dead": 0, "disk-sleep": 0}
+        process_list = []
+        for process in psutil.process_iter():
+            try:
+                counts[process.status()] += 1
+                process_list.append(
+                    {
+                        "pid": process.pid,
+                        "name": process.name(),
+                        "status": process.status(),
+                        "started_at": process.create_time(),
+                    }
+                )
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
         context["counts"] = counts
-        filter_form = {}
-        filter_form["form"] = HostProcessFilterForm(request.GET or None)
-        filter_form["modal_name"] = "filter_processes"
-        filter_form["modal_size"] = "modal-lg"
-        filter_form["modal_title"] = "Filter Host Processes"
-        filter_form["hx_method"] = "hx-get"
-        filter_form["hx_url"] = "/hostutils/get_host_processes"
-        filter_form["hx_target"] = "id_process_list_container"
-        filter_form["method"] = "GET"
-        filter_form["action"] = "Filter"
-        context["filter_form"] = filter_form
+        context["process_list"] = process_list
         return render(request, self.template_name, context=context)

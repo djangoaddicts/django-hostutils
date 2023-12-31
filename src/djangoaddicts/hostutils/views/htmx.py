@@ -14,8 +14,7 @@ from djangoaddicts.hostutils.forms import HostProcessFilterForm
 class GetHostCpuStats(BuildBootstrapModalView):
     """Get statistics for a given CPU"""
 
-    modal_button_close = None
-    modal_button_submit = "Close"
+    modal_button_submit = None
     modal_size = "modal-lg"
     modal_title = "CPU Details"
 
@@ -38,8 +37,7 @@ class GetHostCpuStats(BuildBootstrapModalView):
 class GetHostNetworkStats(BuildBootstrapModalView):
     """Get statistics for a given network interface"""
 
-    modal_button_close = None
-    modal_button_submit = "Close"
+    modal_button_submit = None
     modal_size = "modal-lg"
     modal_title = "Network Interface Details"
 
@@ -57,8 +55,7 @@ class GetHostNetworkStats(BuildBootstrapModalView):
 class GetHostParitionStats(BuildBootstrapModalView):
     """Get statistics for a given disk partition"""
 
-    modal_button_close = None
-    modal_button_submit = "Close"
+    modal_button_submit = None
     modal_title = "Partition Details"
 
     def get(self, request, *args, **kwargs):
@@ -76,39 +73,27 @@ class GetHostParitionStats(BuildBootstrapModalView):
 class GetHostProcesses(View):
     """Get host processes"""
 
-    @staticmethod
-    def get_process_count(process_list: list, status: str) -> int:
-        """get a count of processes for a given status
-
-        Args:
-            process_list (list): list of processes as returned from psutil.process_iter()
-            status (str): name of process status to count
-
-        Returns:
-            int: number of processes of 'status'
-        """
-        count = 0
-        for process in process_list:
-            try:
-                if process.status() == status:
-                    count += 1
-            except psutil.NoSuchProcess:
-                continue
-        return count
-
     def get(self, request):
         """Get host prcesses"""
         context = {}
-        process_list = list(psutil.process_iter())
         filter_form = HostProcessFilterForm(request.GET or None)
-        context["counts"] = {
-            "running": self.get_process_count(process_list, "running"),
-            "sleeping": self.get_process_count(process_list, "sleeping"),
-            "idle": self.get_process_count(process_list, "idle"),
-            "stopped": self.get_process_count(process_list, "stopped"),
-            "zombie": self.get_process_count(process_list, "zombie"),
-            "dead": self.get_process_count(process_list, "dead"),
-        }
+        counts = {"running": 0, "sleeping": 0, "idle": 0, "stopped": 0, "zombie": 0, "dead": 0, "disk-sleep": 0}
+
+        process_list = []
+        for process in psutil.process_iter():
+            try:
+                counts[process.status()] += 1
+                process_list.append(
+                    {
+                        "pid": process.pid,
+                        "name": process.name(),
+                        "status": process.status(),
+                        "started_at": process.create_time(),
+                    }
+                )
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+        context["counts"] = counts
 
         if request.GET.dict().get("clear", None):
             context["clear_filter"] = False
@@ -120,20 +105,20 @@ class GetHostProcesses(View):
                 if filter_form.cleaned_data.get("status", None):
                     filtered_process_list = []
                     for i in process_list:
-                        if i.status() in filter_form.cleaned_data["status"]:
+                        if i["status"] in filter_form.cleaned_data["status"]:
                             filtered_process_list.append(i)
                     process_list = filtered_process_list
 
                 if filter_form.cleaned_data.get("created_at__gte", None):
                     filtered_process_list = []
                     for i in process_list:
-                        if i.create_time() > filter_form.cleaned_data["created_at__gte"].timestamp():
+                        if i["started_at"] > filter_form.cleaned_data["created_at__gte"].timestamp():
                             filtered_process_list.append(i)
                     process_list = filtered_process_list
                 if filter_form.cleaned_data.get("created_at__lte", None):
                     filtered_process_list = []
                     for i in process_list:
-                        if i.create_time() < filter_form.cleaned_data["created_at__lte"].timestamp():
+                        if i["started_at"] < filter_form.cleaned_data["created_at__lte"].timestamp():
                             filtered_process_list.append(i)
                     process_list = filtered_process_list
 

@@ -1,5 +1,9 @@
 from django.test import TestCase
 from django.shortcuts import reverse
+from unittest.mock import patch
+import psutil
+import subprocess
+import itertools
 
 
 class ShowHostCpuTests(TestCase):
@@ -66,3 +70,16 @@ class ShowHostProcessesTests(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "hostutils/bs5/detail/processes.html")
+
+    def test_get_with_invalid(self):
+        """verify page is redered if psutil.NoSuchProcess is raised"""
+        url = reverse("hostutils:host_process")
+        process_list = psutil.process_iter()
+        with patch("psutil.process_iter") as mocked_process_list:
+            p = subprocess.Popen("ls", stdout=subprocess.PIPE)
+            mp = iter((psutil.Process(p.pid), psutil.Process(p.pid)))
+            p.communicate()
+            mocked_process_list.return_value = itertools.chain(mp, process_list)
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, "hostutils/bs5/detail/processes.html")

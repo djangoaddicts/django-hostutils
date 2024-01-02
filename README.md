@@ -1,12 +1,14 @@
 # django-hostutils
-[![Downloads](https://static.pepy.tech/badge/django-hostutils)](https://pepy.tech/project/django-hostutils)
 [![PyPI](https://img.shields.io/pypi/v/django-hostutils?label=pypi%20package&color=blue)](https://pypi.org/project/django-hostutils/)
+[![Downloads](https://static.pepy.tech/badge/django-hostutils)](https://pepy.tech/project/django-hostutils)
+![](https://img.shields.io/pypi/status/django-pygwalker)
+
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7474/badge)](https://bestpractices.coreinfrastructure.org/projects/7474)
 
 ![PyPI - Python](https://img.shields.io/pypi/pyversions/django-hostutils)
 ![PyPI - Django](https://img.shields.io/pypi/djversions/django-hostutils)
 
-Django hostutils is a collection of utilities to provide information and metrics for hosts running a Django project. Data is available via included Bootstrap 5 templates and custom views/templates also be used. Host metric data includes:
+Django hostutils is a collection of utilities to provide information and metrics for hosts running a Django project. Data is available via included Bootstrap 5 templates and custom views/templates can also be used. Host metric data includes:
 - Host OS, release, uptime
 - CPU count and utilization
 - Memory usage
@@ -47,13 +49,6 @@ Dashboard: https://coveralls.io/github/djangoaddicts/django-hostutils
 Full documentation can be found on: https://django-hostutils.readthedocs.io/en/latest/index.html 
 
 Documentation source files are available in the [docs](https://github.com/djangoaddicts/django-hostutils/tree/main/docs/source) folder.
-
-<br/>
-
-## License
-django-hostutils is licensed under the GNU-3 license (see the LICENSE file for details).
-
-https://github.com/djangoaddicts/django-hostutils/blob/docs/LICENSE 
 
 
 <br/>
@@ -136,3 +131,15 @@ Custom views/templates can be used to override the Bootstrap 5 templates provide
         template_name = "my_custom_template.html"
         title = "My Custom Title"
     ```
+
+<br/>
+
+## License
+django-hostutils is licensed under the GNU-3 license (see the LICENSE file for details).
+
+https://github.com/djangoaddicts/django-hostutils/blob/docs/LICENSE 
+
+<br/>
+
+## Contributing
+To contribute to django-hostutils, please see [Contributing](.github/CONTRIBUTING.md)

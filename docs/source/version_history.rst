@@ -17,4 +17,5 @@ Version History
    "0.0.7", "adding isort; adding badges to readme"
    "0.0.8", "fixed modal trigger on host process card"
    "0.0.9", "fixed stale process handling in host process view; updated modals"
-   "0.0.10", "updating template css; bug fixes"
+   "0.0.10", "updating template css"
+   "0.0.11", "updated unittest for process view; fix release tag"

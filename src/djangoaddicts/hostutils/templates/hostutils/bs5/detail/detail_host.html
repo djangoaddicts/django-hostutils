@@ -4,44 +4,6 @@
 
 {% block local_head %}
     <style>
-        .card a { text-decoration: none; }
-        .titlecard-container {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            align-content: center;
-            align-items: center;
-            justify-content: center;
-        }
-        .titlecard-container > * {
-            flex: 1;
-        }
-        .titlecard {
-            height: 8rem;
-            min-width: 250px;
-            max-width: 475;
-            color: var(--bs-light);
-            text-decoration: none;
-        }
-        .titlecard .icon {
-            color: var(--bs-primary);
-            font-size: 2.5rem;
-            text-align: left;
-            margin-top: -.5rem;
-        }
-        .titlecard .stat {
-            color: var(--bs-secondary);
-            font-size: 2rem;
-            font-weight: bold;
-            text-align: right;
-            margin-top: -.5rem;
-        }
-        .titlecard .description {
-            color: var(--bs-primary);
-            font-weight: bold;
-            font-size: 1.25rem;
-            text-align: left;
-        }
         .even-columns {
             display: flex;
             gap: 2rem;
@@ -88,61 +50,92 @@
     {% endif %}
 </section>
 
-<section class="mb-5 animated fadeIn" style="animation-delay: .25s;">
-    <div class="container-fluid mt-5">
-        <div class="titlecard-container">
-            <div class="card titlecard shadow hvr-grow">
+<section class="my-4 animated fadeIn" style="animation-delay: .25s;">
+    <div class="container-fluid">
+        <div class="row justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
+            <!-- Cards center aligned -->
+            <div class="col">
                 <a href="{% url 'hostutils:host_cpu' %}">
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-4 icon"><i class="fa-solid fa-microchip fa-lg"></i></div>
-                            <div class="col-8 stat">{{ cpu_count }}</div>
+                    <div class="card h-75 shadow hvr-grow d-flex">
+                        <div class="card-body">
+                            <div class="row mb-3 fw-bold">
+                                <div class="col-3 h3 fw-bold text-primary"><i class="fa-solid fa-microchip fa-lg"></i></div>
+                                <div class="col-9 h4 fw-bold text-secondary text-end">{{ cpu_count }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 h5 fw-bold text-primary">
+                                    CPU Count
+                                </div>
+                            </div>
                         </div>
-                        <div class="description">CPU Count</div>
                     </div>
                 </a>
             </div>
-            <div class="card titlecard shadow hvr-grow">
+            <div class="col">
                 <a href="{% url 'hostutils:host_memory' %}">
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-4 icon"><i class="fa-solid fa-memory fa-lg"></i></div>
-                            <div class="col-8 stat">{{ memory.percent }}%</div>
+                    <div class="card h-75 shadow hvr-grow d-flex">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-3 h3 fw-bold text-primary"><i class="fa-solid fa-memory fa-lg"></i></div>
+                                <div class="col-9 h4 fw-bold text-secondary text-end">{{ memory.percent }}%</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 h5 fw-bold text-primary">
+                                    Memory Usage
+                                </div>
+                            </div>
                         </div>
-                        <div class="description">Memory Usage</div>
                     </div>
                 </a>
             </div>
-            <div class="card titlecard shadow hvr-grow">
+            <div class="col">
                 <a href="{% url 'hostutils:host_disk' %}">
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-4 icon"><i class="fa-solid fa-hard-drive fa-lg"></i></div>
-                            <div class="col-8 stat">{{ disk_usage.percent }}%</div>
+                    <div class="card h-75 shadow hvr-grow d-flex">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-3 h3 fw-bold text-primary"><i class="fa-solid fa-hard-drive fa-lg"></i></div>
+                                <div class="col-9 h4 fw-bold text-secondary text-end">{{ disk_usage.percent }}%</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 h5 fw-bold text-primary">
+                                    Disk Usage
+                                </div>
+                            </div>
                         </div>
-                        <div class="description">Disk Usage</div>
                     </div>
                 </a>
             </div>
-            <div class="card titlecard shadow hvr-grow">
+            <div class="col">
                 <a href="{% url 'hostutils:host_process' %}">
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-6 icon"><i class="fa-solid fa-gears fa-lg"></i></div>
-                            <div class="col-6 stat">{{ pids|length }}</div>
+                    <div class="card h-75 shadow hvr-grow d-flex">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-3 h3 fw-bold text-primary"><i class="fa-solid fa-gears fa-lg"></i></div>
+                                <div class="col-9 h4 fw-bold text-secondary text-end">{{ pids|length }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 h5 fw-bold text-primary">
+                                    Processes
+                                </div>
+                            </div>
                         </div>
-                        <div class="description">Processes</div>
                     </div>
                 </a>
             </div>
-            <div class="card titlecard shadow hvr-grow">
+            <div class="col">
                 <a href="{% url 'hostutils:host_network' %}">
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-6 icon"><i class="fa-solid fa-network-wired fa-lg"></i></div>
-                            <div class="col-6 stat">{{ network|length }}</div>
+                    <div class="card h-75 shadow hvr-grow d-flex">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-3 h3 fw-bold text-primary"><i class="fa-solid fa-network-wired fa-lg"></i></div>
+                                <div class="col-9 h4 fw-bold text-secondary text-end">{{ network|length }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 h5 fw-bold text-primary">
+                                    Network Connections
+                                </div>
+                            </div>
                         </div>
-                        <div class="description">Network Connections</div>
                     </div>
                 </a>
             </div>
@@ -150,9 +143,8 @@
     </div>
 </section>
 
-<section class="mb-5 animated fadeIn" style="animation-delay: .35s;">
-    <div class="container-fluid mt-5">
-        <div class="m-5">&nbsp;</div>
+<section class="my-4 animated fadeIn" style="animation-delay: .35s;">
+    <div class="container-fluid">
         <div class="even-columns">
             <div class="card datacard shadow">
                 <div class="card-header">OS and Uptime</div>

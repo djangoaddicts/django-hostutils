@@ -1,9 +1,9 @@
 {% load handyhelper_tags %}
         <div class="card shadow">
-            <div class="card-header">
+            <div class="card-header text-primary">
                 <div class="row">
                     <div class="col-6 text-start">
-                        Processes <span class="small">({{ process_list|length }})</span>
+                        <span class="h4 fw-bold">Processes</span><span class="h6 ms-2">({{ process_list|length }})</span>
                     </div>
                     <div class="col-6 text-end">
                         <span href="#" data-bs-toggle="modal" data-bs-target="#modal_{{ filter_form.modal_name }}" title="{{ filter_form.tool_tip|default_if_none:'filter' }}" class="mx-1" style="cursor: pointer;">
@@ -17,21 +17,20 @@
                     </div>
                 </div>
             </div>
-                <div class="card-body" style="overflow-y: auto; overflow-x: hidden; max-height: 50vh; cursor: pointer;">
-                    <ul class="list-group mx-auto justify-content-center" style="max-width: 93%; margin-top: .5%; margin-bottom: .5%">
-                        {% for item in process_list %}
-                        <li class="list-group-item bg-light shadow-sm hvr-grow mb-3">
-                            <div hx-get="{% url 'hostutils:get_process_stats' item.pid %}" hx-target="#modal_wrapper" data-bs-toggle="modal" data-bs-target="#modal_wrapper">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-2"><span class="key">PID:</span><span class="value">{{ item.pid }}</span></div>
-                                    <div class="col-xs-12 col-md-4"><span class="key">Name:</span><span class="value">{{ item.name }}</span></div>
-                                    <div class="col-xs-12 col-md-2"><span class="key">Status:</span><span class="value">{{ item.status }}</span></div>
-                                    <div class="col-xs-12 col-md-4"><span class="key">Started At:</span><span class="value">{{ item.create_time|to_datetime }}</span></div>
-                                </div>
+            <div class="card-body" style="overflow-y: auto; overflow-x: hidden; max-height: 50vh; cursor: pointer;">
+                <ul class="list-group mx-auto justify-content-center" style="max-width: 93%; margin-top: .5%; margin-bottom: .5%">
+                    {% for item in process_list %}
+                    <li class="list-group-item bg-light-subtle shadow-sm hvr-grow mb-3">
+                        <div hx-get="{% url 'hostutils:get_process_stats' item.pid %}" hx-target="#modal_wrapper" data-bs-toggle="modal" data-bs-target="#modal_wrapper">
+                            <div class="row">
+                                <div class="col"><span class="fw-bold text-primary mx-1">PID:</span><span class="text-secondary mx-1">{{ item.pid }}</span></div>
+                                <div class="col"><span class="fw-bold text-primary mx-1">Name:</span><span class="text-secondary mx-1">{{ item.name }}</span></div>
+                                <div class="col"><span class="fw-bold text-primary mx-1">Status:</span><span class="text-secondary mx-1">{{ item.status }}</span></div>
+                                <div class="col"><span class="fw-bold text-primary mx-1">Started At:</span><span class="text-secondary mx-1">{{ item.create_time|to_datetime }}</span></div>
                             </div>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>

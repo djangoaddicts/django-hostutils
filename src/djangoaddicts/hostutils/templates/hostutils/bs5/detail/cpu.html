@@ -55,6 +55,7 @@
             .titlecard .description {
                 font-size: .75rem;
             }
+        }
 
         @media (max-width: 775px) {
             .titlecard {
@@ -66,6 +67,7 @@
             .titlecard .description {
                 font-size: .5rem;
             }
+        }
 
         @media (max-width: 650px) {
             .titlecard {
@@ -77,7 +79,7 @@
             .titlecard .description {
                 font-size: .5rem;
             }
-
+        }
     </style>
 {% endblock %}
 
@@ -164,23 +166,22 @@
     <div class="container-fluid mt-5">
         <div class="card shadow">
             <div class="card-header">CPUs <span class="small">({{ logical_count }})</span></div>
-                <div class="card-body" style="overflow-y: auto; overflow-x: hidden; max-height: 50vh">
-                    <ul class="list-group mx-auto justify-content-center" style="max-width: 93%; margin-top: .5%; margin-bottom: .5%">
-                        {% for cpu, data in cpu_data.items %}
-                        <li class="list-group-item bg-light shadow-sm hvr-grow mb-3">
-                            <a href="#" hx-get="{% url 'hostutils:get_cpu_stats' cpu %}" hx-target="#modal_wrapper" data-bs-toggle="modal" data-bs-target="#modal_wrapper">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-2"><span class="key">CPU:</span><span class="value">{{ cpu }}</span></div>
-                                    <div class="col-xs-12 col-md-2"><span class="key">Percent:</span><span class="value">{{ data.percent }}%</span></div>
-                                    <div class="col-xs-12 col-md-3"><span class="key">System:</span><span class="value">{{ data.time_percent.system }}%</span></div>
-                                    <div class="col-xs-12 col-md-2"><span class="key">Idle:</span><span class="value">{{ data.time_percent.idle }}%</span></div>
-                                    <div class="col-xs-12 col-md-3"><span class="key">Frequency:</span><span class="value">{{ data.frequency.current }}</span></div>
-                                </div>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+            <div class="card-body" style="overflow-y: auto; overflow-x: hidden; max-height: 50vh">
+                <ul class="list-group mx-auto justify-content-center" style="max-width: 93%; margin-top: .5%; margin-bottom: .5%">
+                    {% for cpu, data in cpu_data.items %}
+                    <li class="list-group-item bg-light-subtle shadow-sm hvr-grow mb-3">
+                        <a href="#" hx-get="{% url 'hostutils:get_cpu_stats' cpu %}" hx-target="#modal_wrapper" data-bs-toggle="modal" data-bs-target="#modal_wrapper">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-2"><span class="key">CPU:</span><span class="value">{{ cpu }}</span></div>
+                                <div class="col-xs-12 col-md-2"><span class="key">Percent:</span><span class="value">{{ data.percent }}%</span></div>
+                                <div class="col-xs-12 col-md-3"><span class="key">System:</span><span class="value">{{ data.time_percent.system }}%</span></div>
+                                <div class="col-xs-12 col-md-2"><span class="key">Idle:</span><span class="value">{{ data.time_percent.idle }}%</span></div>
+                                <div class="col-xs-12 col-md-3"><span class="key">Frequency:</span><span class="value">{{ data.frequency.current }}</span></div>
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

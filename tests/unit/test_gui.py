@@ -74,8 +74,8 @@ class ShowHostProcessesTests(TestCase):
     def test_get_with_invalid(self):
         """verify page is redered if psutil.NoSuchProcess is raised"""
         url = reverse("hostutils:host_process")
-        process_list = psutil.process_iter()
         with patch("psutil.process_iter") as mocked_process_list:
+            process_list = psutil.process_iter()
             p = subprocess.Popen("ls", stdout=subprocess.PIPE)
             mp = iter((psutil.Process(p.pid), psutil.Process(p.pid)))
             p.communicate()

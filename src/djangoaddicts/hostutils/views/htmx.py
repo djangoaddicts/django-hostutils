@@ -74,7 +74,8 @@ class GetHostProcesses(View):
     """Get host processes"""
 
     def get(self, request):
-        """Get host prcesses"""
+        """Get host processes"""
+        print("TEST: in htmx get")
         context = {}
         filter_form = HostProcessFilterForm(request.GET or None)
         counts = {"running": 0, "sleeping": 0, "idle": 0, "stopped": 0, "zombie": 0, "dead": 0, "disk-sleep": 0}
@@ -88,7 +89,7 @@ class GetHostProcesses(View):
                         "pid": process.pid,
                         "name": process.name(),
                         "status": process.status(),
-                        "started_at": process.create_time(),
+                        "create_time": process.create_time(),
                     }
                 )
             except (psutil.NoSuchProcess, psutil.AccessDenied):
@@ -110,15 +111,16 @@ class GetHostProcesses(View):
                     process_list = filtered_process_list
 
                 if filter_form.cleaned_data.get("created_at__gte", None):
+                    print(filter_form.cleaned_data["created_at__gte"].timestamp())
                     filtered_process_list = []
                     for i in process_list:
-                        if i["started_at"] > filter_form.cleaned_data["created_at__gte"].timestamp():
+                        if i["create_time"] > filter_form.cleaned_data["created_at__gte"].timestamp():
                             filtered_process_list.append(i)
                     process_list = filtered_process_list
                 if filter_form.cleaned_data.get("created_at__lte", None):
                     filtered_process_list = []
                     for i in process_list:
-                        if i["started_at"] < filter_form.cleaned_data["created_at__lte"].timestamp():
+                        if i["create_time"] < filter_form.cleaned_data["created_at__lte"].timestamp():
                             filtered_process_list.append(i)
                     process_list = filtered_process_list
 

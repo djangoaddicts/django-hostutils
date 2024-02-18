@@ -139,16 +139,22 @@ class ShowHostProcesses(View):
         context["title"] = self.title
         context["now"] = datetime.datetime.now()
         context["subtitle"] = psutil.os.uname()[1]
-        process_list = list(psutil.process_iter())
+        counts = {"running": 0, "sleeping": 0, "idle": 0, "stopped": 0, "zombie": 0, "dead": 0, "disk-sleep": 0}
+        process_list = []
+        for process in psutil.process_iter():
+            try:
+                counts[process.status()] += 1
+                process_list.append(
+                    {
+                        "pid": process.pid,
+                        "name": process.name(),
+                        "status": process.status(),
+                        "create_time": process.create_time(),
+                    }
+                )
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
         context["process_list"] = process_list
-        counts = {
-            "running": len([i for i in process_list if i.status() == "running"]),
-            "sleeping": len([i for i in process_list if i.status() == "sleeping"]),
-            "idle": len([i for i in process_list if i.status() == "idle"]),
-            "stopped": len([i for i in process_list if i.status() == "stopped"]),
-            "zombie": len([i for i in process_list if i.status() == "zombie"]),
-            "dead": len([i for i in process_list if i.status() == "dead"]),
-        }
         context["counts"] = counts
         filter_form = {}
         filter_form["form"] = HostProcessFilterForm(request.GET or None)

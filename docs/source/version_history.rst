@@ -19,3 +19,4 @@ Version History
    "0.0.9", "fixed stale process handling in host process view; updated modals"
    "0.0.10", "updating template css"
    "0.0.11", "updated unittest for process view; fix release tag"
+   "0.0.12", "updated card height"

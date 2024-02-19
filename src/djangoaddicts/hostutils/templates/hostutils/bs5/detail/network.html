@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center text-center g-4">
             <div class="col-6 col-md-3 col-xl">
-                <div class="card h-75 shadow">
+                <div class="card h-100 shadow">
                     <div class="card-body">
                         <div class="h3 fw-bold text-primary">{{ counters.bytes_sent|byte_size }}</div>
                         <div class="fw-bold text-secondary">Bytes Sent</div>
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="col-6 col-md-3 col-xl">
-                <div class="card h-75 shadow">
+                <div class="card h-100 shadow">
                     <div class="card-body">
                         <div class="h3 fw-bold text-primary">{{ counters.bytes_recv|byte_size }}</div>
                         <div class="fw-bold text-secondary">Bytes Received</div>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="col-6 col-md-3 col-xl">
-                <div class="card h-75 shadow">
+                <div class="card h-100 shadow">
                     <div class="card-body">
                         <div class="h3 fw-bold text-primary">{{ counters.packets_sent|byte_size }}</div>
                         <div class="fw-bold text-secondary">Packets Sent</div>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="col-6 col-md-3 col-xl">
-                <div class="card h-75 shadow">
+                <div class="card h-100 shadow">
                     <div class="card-body">
                         <div class="h3 fw-bold text-primary">{{ counters.packets_recv|byte_size }}</div>
                         <div class="fw-bold text-secondary">Packets Received</div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="col-6 col-md-3 col-xl">
-                <div class="card h-75 shadow">
+                <div class="card h-100 shadow">
                     <div class="card-body">
                         <div class="h3 fw-bold text-primary">{{ counters.errin }}</div>
                         <div class="fw-bold text-secondary">Errors In</div>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="col-6 col-md-3 col-xl">
-                <div class="card h-75 shadow">
+                <div class="card h-100 shadow">
                     <div class="card-body">
                         <div class="h3 fw-bold text-primary">{{ counters.errout }}</div>
                         <div class="fw-bold text-secondary">Errors Out</div>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="col-6 col-md-3 col-xl">
-                <div class="card h-75 shadow">
+                <div class="card h-100 shadow">
                     <div class="card-body">
                         <div class="h3 fw-bold text-primary">{{ counters.dropin }}</div>
                         <div class="fw-bold text-secondary">Drops In</div>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="col-6 col-md-3 col-xl">
-                <div class="card h-75 shadow">
+                <div class="card h-100 shadow">
                     <div class="card-body">
                         <div class="h3 fw-bold text-primary">{{ counters.dropout }}</div>
                         <div class="fw-bold text-secondary">Drops Out</div>
@@ -127,16 +127,16 @@
                         <div class="row">
                             <div class="col small"><span class="fw-bold text-primary mx-1">laddr:</span><span class="text-secondary mx-1">{{ connection.laddr.ip }}</span></div>
                             <div class="col small"><span class="fw-bold text-primary mx-1">lport:</span><span class="text-secondary mx-1">{{ connection.laddr.port }}</span></div>
-                            <div class="col small"><span class="fw-bold text-primary mx-1">family:</span><span class="text-secondary mx-1">{{ connection.family.name }}</span></div>
                             <div class="col small"><span class="fw-bold text-primary mx-1">fd:</span><span class="text-secondary mx-1">{{ connection.fd }}</span></div>
+                            <div class="col small"><span class="fw-bold text-primary mx-1">family:</span><span class="text-secondary mx-1">{{ connection.family.name }}</span></div>
                             <div class="col small"><span class="fw-bold text-primary mx-1">status:</span><span class="text-secondary mx-1">{{ connection.status }}</span></div>
                         </div>
                         <div class="row">
                             <div class="col small"><span class="fw-bold text-primary mx-1">raddr:</span><span class="text-secondary mx-1">{{ connection.raddr.ip }}</span></div>
                             <div class="col small"><span class="fw-bold text-primary mx-1">rport:</span><span class="text-secondary mx-1">{{ connection.raddr.port }}</span></div>
-                            <div class="col small"><span class="fw-bold text-primary mx-1">type:</span><span class="text-secondary mx-1">{{ connection.type }}</span></div>
                             <div class="col small"><span class="fw-bold text-primary mx-1">pid:</span><span class="text-secondary mx-1">{{ connection.pid }}</span></div>
-                            <div class="col small"><span class="fw-bold text-primary mx-1">&nbsp;</span><span class="text-secondary mx-1">&nbsp;</span></div>
+                            <div class="col small"><span class="fw-bold text-primary mx-1">type:</span><span class="text-secondary mx-1">{{ connection.type }}</span></div>
+                            <div class="col small"><span class="fw-bold text-primary mx-1">&nbsp;</span><span class="text-secondary mx-1">&nbsp</span></div>
                         </div>
                     {% endfor %}
                 </ul>

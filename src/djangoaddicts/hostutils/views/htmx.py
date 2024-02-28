@@ -20,14 +20,15 @@ class GetHostCpuStats(BuildBootstrapModalView):
 
     def get(self, request, *args, **kwargs):
         context = {}
-        self.modal_subtitle = kwargs["cpu"]
+        self.modal_subtitle = kwargs.get("cpu", None)
         try:
-            cpu = kwargs["cpu"]
+            cpu = kwargs.get("cpu", None)
             context = {
                 "time": psutil.cpu_times(percpu=True)[cpu],
                 "time_percent": psutil.cpu_times_percent(percpu=True)[cpu],
                 "frequency": psutil.cpu_freq(percpu=True)[cpu],
             }
+            print('TEST: ', kwargs)
         except IndexError:
             return HttpResponse("Invalid request", status=400)
         self.modal_body = loader.render_to_string("hostutils/bs5/htmx/get_cpu_stats.htm", context=context)

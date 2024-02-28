@@ -2,18 +2,21 @@ import datetime
 
 import psutil
 from dateutil.relativedelta import relativedelta
+from django.conf import settings
 from django.shortcuts import render
 from django.views.generic import View
+from handyhelpers.permissions import InAnyGroup
 
 # import forms
 from djangoaddicts.hostutils.forms import HostProcessFilterForm
 
 
-class ShowHost(View):
+class ShowHost(InAnyGroup, View):
     """Display dashboard like page showing an overview of host data"""
 
     template_name = "hostutils/bs5/detail/detail_host.html"
     title = "Host Dashboard"
+    permission_dict = {"GET": getattr(settings, "DJA_HOSTUTILS_PERMISSIONS", [])}
 
     def get(self, request, *args, **kwargs):
         """allow get method"""
@@ -41,11 +44,12 @@ class ShowHost(View):
         return render(request, self.template_name, context=context)
 
 
-class ShowHostCpu(View):
+class ShowHostCpu(InAnyGroup, View):
     """Display dashboard like page showing host cpu data"""
 
     template_name = "hostutils/bs5/detail/cpu.html"
     title = "CPU Dashboard"
+    permission_dict = {"GET": getattr(settings, "DJA_HOSTUTILS_PERMISSIONS", [])}
 
     def get(self, request, *args, **kwargs):
         """CPU Dashboard"""
@@ -76,11 +80,12 @@ class ShowHostCpu(View):
         return render(request, self.template_name, context=context)
 
 
-class ShowHostDisk(View):
+class ShowHostDisk(InAnyGroup, View):
     """Display dashboard like page showing host disk data"""
 
     template_name = "hostutils/bs5/detail/disk.html"
     title = "Disk Dashboard"
+    permission_dict = {"GET": getattr(settings, "DJA_HOSTUTILS_PERMISSIONS", [])}
 
     def get(self, request, *args, **kwargs):
         """allow get method"""
@@ -93,11 +98,12 @@ class ShowHostDisk(View):
         return render(request, self.template_name, context=context)
 
 
-class ShowHostMemory(View):
+class ShowHostMemory(InAnyGroup, View):
     """Display dashboard like page showing host memory data"""
 
     template_name = "hostutils/bs5/detail/memory.html"
     title = "Memory Dashboard"
+    permission_dict = {"GET": getattr(settings, "DJA_HOSTUTILS_PERMISSIONS", [])}
 
     def get(self, request, *args, **kwargs):
         """allow get method"""
@@ -109,11 +115,12 @@ class ShowHostMemory(View):
         return render(request, self.template_name, context=context)
 
 
-class ShowHostNetwork(View):
+class ShowHostNetwork(InAnyGroup, View):
     """Display dashboard like page showing host network data"""
 
     template_name = "hostutils/bs5/detail/network.html"
     title = "Network Dashboard"
+    permission_dict = {"GET": getattr(settings, "DJA_HOSTUTILS_PERMISSIONS", [])}
 
     def get(self, request, *args, **kwargs):
         """allow get method"""
@@ -127,11 +134,12 @@ class ShowHostNetwork(View):
         return render(request, self.template_name, context=context)
 
 
-class ShowHostProcesses(View):
+class ShowHostProcesses(InAnyGroup, View):
     """Display dashboard like page showing host process data"""
 
     template_name = "hostutils/bs5/detail/processes.html"
     title = "Process Dashboard"
+    permission_dict = {"GET": getattr(settings, "DJA_HOSTUTILS_PERMISSIONS", [])}
 
     def get(self, request, *args, **kwargs):
         """allow get method"""

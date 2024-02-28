@@ -3,6 +3,7 @@ Minimal file so Sphinx can work with Django for autodocumenting.
 
 Location: /docs/django_settings.py
 """
+
 from pathlib import Path
 
 import os
@@ -18,8 +19,16 @@ SECRET_KEY = "test"
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
     "handyhelpers",
     "djangoaddicts.hostutils",
+]
+
+MIDDLEWARE = [
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
 ]
 
 ROOT_URLCONF = "tests.core.urls"
@@ -53,5 +62,7 @@ TEMPLATES = [
 BASE_TEMPLATE = "handyhelpers/handyhelpers_bs5/base.htm"
 
 USE_TZ = True
+
+MESSAGE_ON_PERMISSION_DENY = True
 
 print(BASE_DIR)

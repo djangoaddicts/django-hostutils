@@ -20,3 +20,4 @@ Version History
    "0.0.10", "updating template css"
    "0.0.11", "updated unittest for process view; fix release tag"
    "0.0.12", "updated card height"
+   "0.0.13", "adding RBAC option for views"

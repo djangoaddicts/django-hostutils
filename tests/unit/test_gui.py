@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.shortcuts import reverse
 from unittest.mock import patch
 import psutil
@@ -6,13 +6,16 @@ import subprocess
 import itertools
 
 
+
 class ShowHostCpuTests(TestCase):
     """test ShowHostCpu view"""
 
     def test_get(self):
         """verify page can be rendered"""
-        url = reverse("hostutils:host_cpu")
-        response = self.client.get(url)
+        referrer = reverse("home")
+        url = reverse("hostutils:host_cpu")       
+       
+        response = self.client.get(url, HTTP_REFERER=referrer)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "hostutils/bs5/detail/cpu.html")
 
@@ -73,6 +76,7 @@ class ShowHostProcessesTests(TestCase):
 
     def test_get_with_invalid(self):
         """verify page is redered if psutil.NoSuchProcess is raised"""
+
         url = reverse("hostutils:host_process")
         with patch("psutil.process_iter") as mocked_process_list:
             process_list = psutil.process_iter()
